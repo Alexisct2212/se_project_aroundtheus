@@ -4,6 +4,10 @@
 
 # the technolgies used here are HTML5, CSS3, Felxbox , grid , @media screen.
 
+github
+
+https://alexisct2212.github.io/se_project_aroundtheus/index.html
+
 project Video
 
 https://drive.google.com/file/d/1sUtB6Dt_7HeUFme2bDSufuW_CHFxOTeE/view?usp=sharing

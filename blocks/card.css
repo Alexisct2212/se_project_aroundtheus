@@ -27,7 +27,14 @@
   border: none;
   height: 25px;
   width: 25px;
+  cursor: pointer;
 }
 .card__like-button:hover {
   opacity: 0.5;
+}
+
+@media screen and (max-width: 320px) {
+  .card__description {
+    max-width: 282px;
+  }
 }
