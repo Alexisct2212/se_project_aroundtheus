@@ -93,6 +93,7 @@
   .profile__info {
     align-items: center;
     justify-content: center;
+    max-width: 272px;
   }
   .profile__add-button {
     max-width: 282px;
