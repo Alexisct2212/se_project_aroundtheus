@@ -110,4 +110,8 @@
   .profile__image {
     margin-right: 0;
   }
+  .profile {
+    margin: 0px 20px 0 20px;
+    padding: 0;
+  }
 }

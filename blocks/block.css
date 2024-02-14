@@ -4,3 +4,8 @@
   overflow: hidden;
   margin: 0;
 }
+@media screen and (max-width: 320px) {
+  .block {
+    max-width: 220px;
+  }
+}
