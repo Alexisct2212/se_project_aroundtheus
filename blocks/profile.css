@@ -27,6 +27,7 @@
   height: 50px;
   width: 150px;
   margin-left: auto;
+  margin-right: auto;
   padding: 0;
   border: 2px solid white;
   border-radius: 2px;
@@ -86,7 +87,6 @@
   }
   .profile__add-button {
     width: 100%;
-    margin: 20px;
   }
 }
 
@@ -94,13 +94,12 @@
   .profile__info {
     align-items: center;
     justify-content: center;
-    max-width: 272px;
+    max-width: 282px;
   }
 
   .profile__title {
     max-width: 282px;
     width: 196px;
-    font-size: 22px;
   }
   .profile__edit-button {
     height: 18px;
@@ -117,9 +116,15 @@
   .profile__description {
     font-size: 14px;
     width: 100%;
-    margin: 0 10px 14px 43px;
+    padding: 0 0 0 0;
+    margin: 0;
   }
   .profile__add-button {
     margin-top: 36px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .profile__title {
+    font-size: 22px;
   }
 }
