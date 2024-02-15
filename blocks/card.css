@@ -28,6 +28,7 @@
   height: 25px;
   width: 25px;
   cursor: pointer;
+  padding: 0;
 }
 .card__like-button:hover {
   opacity: 0.5;

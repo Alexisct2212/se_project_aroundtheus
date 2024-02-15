@@ -7,6 +7,7 @@
 github
 
 https://alexisct2212.github.io/se_project_aroundtheus/index.html
+https://alexisct2212.github.io/se_project_aroundtheus/
 
 project Video
 
