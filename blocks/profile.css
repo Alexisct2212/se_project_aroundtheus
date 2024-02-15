@@ -9,6 +9,7 @@
     "title button"
     "description description";
   grid-template-columns: minmax(auto, 373px) auto;
+  align-items: center;
 }
 .profile__edit-button {
   background: transparent url(../images/edit-icon.svg) center no-repeat;
@@ -30,6 +31,7 @@
   border: 2px solid white;
   border-radius: 2px;
   cursor: pointer;
+  max-width: 282px;
 }
 .profile__add-button:hover {
   opacity: 0.6;
@@ -88,15 +90,13 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 680px) {
   .profile__info {
     align-items: center;
     justify-content: center;
     max-width: 272px;
   }
-  .profile__add-button {
-    max-width: 282px;
-  }
+
   .profile__title {
     max-width: 282px;
     width: 196px;

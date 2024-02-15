@@ -6,7 +6,7 @@
 }
 .card__image {
   width: 282px;
-  height: 361px;
+  height: 282px;
   border-radius: 10px 10px 0 0;
 }
 
@@ -34,7 +34,7 @@
   opacity: 0.5;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 680px) {
   .card__description {
     max-width: 282px;
   }
