@@ -44,7 +44,7 @@
   font-weight: 500;
   font-style: normal;
   grid-area: title;
-  margin: 0;
+  margin: 22px 18px 7px 30px;
 }
 .profile__description {
   font-family: "Inter", Arial, sans-serif;
@@ -52,7 +52,7 @@
   line-height: 22px;
   font-weight: 400;
   grid-area: description;
-  margin: 10px 0 0 0;
+  margin: 0px 18px 0 30px;
 }
 .profile__image {
   height: 120px;
@@ -108,6 +108,7 @@
   }
   .profile__image {
     margin-right: 0;
+    margin-bottom: 30px;
   }
   .profile {
     margin: 42px 19px 36px 19px;
@@ -116,5 +117,9 @@
   .profile__description {
     font-size: 14px;
     width: 100%;
+    margin: 0 10px 14px 43px;
+  }
+  .profile__add-button {
+    margin-top: 36px;
   }
 }
