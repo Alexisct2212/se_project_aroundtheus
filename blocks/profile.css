@@ -27,7 +27,6 @@
   height: 50px;
   width: 150px;
   margin-left: auto;
-  margin-right: auto;
   padding: 0;
   border: 2px solid white;
   border-radius: 2px;
@@ -68,6 +67,9 @@
   margin-right: 24px;
 }
 
+h2 {
+  max-width: 219px;
+}
 @media screen and (max-width: 1100px) {
   .profile {
     margin-bottom: 40px;
@@ -132,5 +134,6 @@
   .profile__add-button {
     margin-top: 36px;
     line-height: 16.94px;
+    margin-right: auto;
   }
 }
