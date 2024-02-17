@@ -46,6 +46,10 @@
   font-style: normal;
   grid-area: title;
   margin: 22px 18px 7px 30px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
 }
 .profile__description {
   font-family: "Inter", Arial, sans-serif;
@@ -99,8 +103,7 @@
 
   .profile__title {
     max-width: 282px;
-    width: 196px;
-    line-height: 26.63px;
+    padding-right: 10px;
   }
   .profile__edit-button {
     height: 18px;
@@ -118,14 +121,16 @@
     font-size: 14px;
     padding: 14px 0 0 0;
     margin: 0;
-    line-height: 16.94px;
-  }
-  .profile__add-button {
-    margin-top: 36px;
   }
 }
 @media screen and (max-width: 480px) {
   .profile__title {
     font-size: 22px;
+    line-height: 26.63px;
+    width: 196px;
+  }
+  .profile__add-button {
+    margin-top: 36px;
+    line-height: 16.94px;
   }
 }
