@@ -48,7 +48,7 @@
   margin: 29px 0 54px 30px;
   text-align: start;
 }
-.input__title {
+.title__input {
   width: 358px;
   margin-bottom: 29.74px;
   border: none;
@@ -60,7 +60,7 @@
   padding-bottom: 13.26px;
 }
 
-.input__description {
+.description__input {
   width: 358px;
   margin-bottom: 48px;
   border: none;
