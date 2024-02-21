@@ -1,0 +1,31 @@
+.title__input {
+  width: 358px;
+  margin-bottom: 29.74px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  padding-bottom: 13.26px;
+}
+
+.description__input {
+  width: 358px;
+  margin-bottom: 48px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  padding-bottom: 13.26px;
+}
+@media screen and (max-width: 680px) {
+  .title__input {
+    max-width: 238px;
+  }
+  .description__input {
+    max-width: 238px;
+  }
+}
