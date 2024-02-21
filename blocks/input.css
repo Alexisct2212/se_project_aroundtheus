@@ -1,4 +1,4 @@
-.input__modal-title {
+.input__form-title {
   width: 358px;
   margin-bottom: 29.74px;
   border: none;
@@ -10,7 +10,7 @@
   padding-bottom: 13.26px;
 }
 
-.input__modal-description {
+.input__form-description {
   width: 358px;
   margin-bottom: 48px;
   border: none;
@@ -22,10 +22,10 @@
   padding-bottom: 13.26px;
 }
 @media screen and (max-width: 680px) {
-  .input__modal-title {
+  .input__form-title {
     max-width: 238px;
   }
-  .input__modal-description {
+  .input__form-description {
     max-width: 238px;
   }
 }
