@@ -1,5 +1,5 @@
-.modal__input-title {
-  width: 358px;
+.modal__input {
+  width: 100%;
   margin-bottom: 30px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -9,8 +9,8 @@
   line-height: 16.94px;
   padding-bottom: 13.26px;
 }
-.modal__input-description {
-  width: 358px;
+.modal__input:last-of-type {
+  width: 100%;
   margin-bottom: 48px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -23,11 +23,11 @@
 
 @media screen and (max-width: 680px) {
   .modal__input-title {
-    max-width: 238px;
+    max-width: 100%;
     margin-bottom: 30px;
   }
   .modal__input-description {
-    max-width: 238px;
+    max-width: 100%;
     margin-bottom: 45px;
   }
 }
