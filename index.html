@@ -66,6 +66,32 @@
         </form>
       </div>
     </div>
+
+    <!-- new modal addBlock-->
+
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <h3 class="modal__heading">New Place</h3>
+        <form class="add-modal__form">
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            class="modal__input"
+            id="modal__input-title"
+          />
+          <input
+            type="text"
+            name="link"
+            placeholder="Image link"
+            class="modal__input"
+            id="modal__input-link"
+          />
+          <button class="modal__button" type="submit">Create</button>
+        </form>
+      </div>
+    </div>
     <template id="card-template">
       <li class="card">
         <img src="" class="card__image" alt="" />

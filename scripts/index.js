@@ -1,15 +1,15 @@
+// Data
 const initialCards = [
   {
     name: "Yosemite Valley",
     description: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg ",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
   },
   {
     name: "Lake Louise",
-    description: "Lake louise",
+    description: "Lake Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
-
   {
     name: "Bald Mountains",
     description: "Bald Mountains",
@@ -22,7 +22,7 @@ const initialCards = [
   },
   {
     name: "Vanoise National Park",
-    description: "vanoise national Park",
+    description: "Vanoise National Park",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
   },
   {
@@ -32,26 +32,31 @@ const initialCards = [
   },
 ];
 
+// DOM Elements
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const closeButton = document.querySelector(".modal__close");
+const profileCloseButton = profileEditModal.querySelector(".modal__close");
 const profileTitle = document.querySelector(".profile__title");
 const profileTitleInput = document.querySelector(".modal__input");
 const profileDescription = document.querySelector(".profile__description");
 const profileDescriptionInput = document.querySelector(
   ".modal__input:last-of-type"
 );
-const profileEditForm = profileEditModal.querySelector(".modal__form");
+const profileEditForm = document.querySelector(".modal__form");
 const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
+const addNewCardButton = document.querySelector(".profile__add-button");
+const addCardModal = document.querySelector("#add-card-modal");
+const addCardProfileCloseButton = addCardModal.querySelector(".modal__close");
 
-/*
-Functions
- */
+// Functions
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+}
 
-function closePopup() {
-  profileEditModal.classList.remove("modal_opened");
+function openModal(modal) {
+  modal.classList.add("modal_opened");
 }
 
 function getCardElement(cardData) {
@@ -66,23 +71,33 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
-/* Event Handlers */
+// Event Handlers
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal_opened");
+  openModal(profileEditModal);
 });
 
-/* Event Listeners */
-closeButton.addEventListener("click", closePopup);
-/* Event handlers */
+profileCloseButton.addEventListener("click", () =>
+  closePopup(profileEditModal)
+);
+
 profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopup();
+  closePopup(profileEditModal);
 });
 
+addNewCardButton.addEventListener("click", () =>
+  addCardModal.classList.add("modal_opened")
+);
+
+addCardProfileCloseButton.addEventListener("click", () =>
+  closePopup(addCardModal)
+);
+
+// Initialization
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
