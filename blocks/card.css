@@ -33,6 +33,9 @@
 .card__like-button:hover {
   opacity: 0.5;
 }
+.card__like-button_active {
+  background-image: url("../images/black-heart.svg");
+}
 
 @media screen and (max-width: 680px) {
   .card__description {
