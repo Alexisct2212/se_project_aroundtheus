@@ -80,6 +80,7 @@
             placeholder="Title"
             class="modal__input"
             id="modal__input-title"
+            required
           />
           <input
             type="text"
@@ -87,6 +88,7 @@
             placeholder="Image link"
             class="modal__input"
             id="modal__input-link"
+            required
           />
           <button class="modal__button" type="submit">Create</button>
         </form>
@@ -96,6 +98,7 @@
     <template id="card-template">
       <li class="card">
         <img src="" class="card__image" alt="" style="cursor: pointer" />
+        <button class="card__delete-button" type="button"></button>
         <div class="card__description">
           <h2 class="block"></h2>
           <button class="card__like-button" type="button" "></button>

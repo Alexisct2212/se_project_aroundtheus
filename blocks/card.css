@@ -36,6 +36,20 @@
 .card__like-button_active {
   background-image: url("../images/black-heart.svg");
 }
+.card__delete-button {
+  position: absolute;
+  margin: 20px 0 0 250px;
+  border: none;
+  background: transparent url("../images/Trash.svg") center no-repeat;
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0/ 0.4));
+  cursor: pointer;
+  height: 21px;
+  width: 18px;
+  padding: 0;
+}
+.card__delete-button:hover {
+  opacity: 0.6;
+}
 
 @media screen and (max-width: 680px) {
   .card__description {
