@@ -126,9 +126,9 @@ profileEditForm.addEventListener("submit", (e) => {
   closePopup(profileEditModal);
 });
 
-addNewCardButton.addEventListener("click", () =>
-  addCardModal.classList.add("modal_opened")
-);
+addNewCardButton.addEventListener("click", () => {
+  openModal(addCardModal);
+});
 
 addCardProfileCloseButton.addEventListener("click", () =>
   closePopup(addCardModal)
