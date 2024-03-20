@@ -36,8 +36,8 @@
   position: absolute;
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   background-image: url(../images/Close\ Icon.svg);
   background-repeat: no-repeat;
   background-size: contain;
@@ -124,9 +124,14 @@
   text-align: justify;
 }
 @media screen and (max-width: 680px) {
+  .modal {
+    top: -250px;
+  }
   .modal__close {
     height: 26px;
     width: 26px;
+    top: -43px;
+    left: 90%;
   }
   .modal__container {
     height: 322px;
@@ -156,12 +161,17 @@
     max-height: 75vh;
     width: auto;
     position: absolute;
-    margin: 90px auto;
+    margin: 136px 40px 133px 40px;
   }
-
+  .preview__modal {
+    top: 0;
+  }
   .preview__image {
     max-width: 100%;
     max-height: 540px;
     z-index: 3;
+  }
+  .preview__close-button {
+    left: 100%;
   }
 }
