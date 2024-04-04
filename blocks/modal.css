@@ -27,7 +27,6 @@
   border-radius: 10px;
   height: 330px;
   width: 430px;
-  text-align: center;
 }
 .modal__close {
   border: none;
@@ -89,6 +88,18 @@
 }
 .modal__input:last-of-type {
   margin-bottom: 48px;
+}
+.modal__error {
+  font-size: 12px;
+  color: #ff0000;
+}
+.modal__input_type_error {
+  opacity: 1;
+}
+.modal__error_visible {
+  position: relative;
+  top: -30px;
+  text-align: start;
 }
 
 .preview__modal {
@@ -154,6 +165,7 @@
   .modal__input:last-of-type {
     margin-bottom: 46px;
   }
+
   .modal__container-preview {
     background: none;
     padding: 0;
