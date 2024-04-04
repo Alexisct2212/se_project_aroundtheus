@@ -20,7 +20,7 @@ function checkInputValidity(formEl, inputEl, options) {
   hideInputError(formEl, inputEl, options);
 }
 
-function ToggleButtonState(inputEls, submitButton, inactiveButtonClass) {
+function ToggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
   let foundInvalid = false;
   inputEls.forEach((inputEl) => {
     if (!inputEl.validity.valid) {
@@ -30,10 +30,10 @@ function ToggleButtonState(inputEls, submitButton, inactiveButtonClass) {
   if (foundInvalid) {
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
-  } else {
-    submitButton.classList.remove(inactiveButtonClass);
-    submitButton.disabled = false;
+    return;
   }
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
 }
 
 function setEventListener(formEl, options) {
