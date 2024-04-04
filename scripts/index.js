@@ -64,8 +64,20 @@ function closePopup(modal) {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.onkeydown = function (event) {
+    event = event || window.event;
+    if (event.keyCode == 27) {
+      closePopup(modal);
+      return;
+    }
+  };
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closePopup(modal);
+    }
+  });
 }
-
+document.onkeydown = null;
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
