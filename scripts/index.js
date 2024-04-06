@@ -58,29 +58,26 @@ const previewImageCloseButton =
   previewImageModalCard.querySelector(".modal__close");
 // preview Image Modal part
 // Functions
+
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalByEscape);
-  modal.removeEventListener("click", function (event) {
-    if (event.target === modal) {
-      closePopup(modal);
-    }
-  });
+  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalByEscape);
-  modal.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      closePopup(modal);
-    }
-  });
+  modal.addEventListener("mousedown", closeModalOnRemoteClick);
 }
-
+function closeModalOnRemoteClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.currentTarget);
+  }
+}
 function closeModalByEscape(evt) {
-  const openedModal = document.querySelector(".modal_opened");
   if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
     window.closePopup(openedModal);
   }
 }
