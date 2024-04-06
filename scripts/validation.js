@@ -19,6 +19,7 @@ function checkInputValidity(formEl, inputEl, options) {
   }
   hideInputError(formEl, inputEl, options);
 }
+
 function hasInvalidInput(inputList) {
   return !inputList.every((inputEl) => inputEl.validity.valid);
 }
@@ -35,8 +36,9 @@ function ToggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
 
 function setEventListener(formEl, options) {
   const { inputSelector } = options;
+  const { submitButtonSelector } = options;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  const submitButton = formEl.querySelector(".modal__button");
+  const submitButton = formEl.querySelector(submitButtonSelector);
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, options);
@@ -51,7 +53,6 @@ function enableValidation(options) {
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-
     setEventListener(formEl, options);
   });
 }
