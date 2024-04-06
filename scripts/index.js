@@ -60,24 +60,31 @@ const previewImageCloseButton =
 // Functions
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalByEscape);
+  modal.removeEventListener("click", function (event) {
+    if (event.target === modal) {
+      closePopup(modal);
+    }
+  });
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.onkeydown = function (event) {
-    event = event || window.event;
-    if (event.keyCode == 27) {
-      closePopup(modal);
-      return;
-    }
-  };
+  document.addEventListener("keydown", closeModalByEscape);
   modal.addEventListener("click", function (event) {
     if (event.target === modal) {
       closePopup(modal);
     }
   });
 }
-document.onkeydown = null;
+
+function closeModalByEscape(evt) {
+  const openedModal = document.querySelector(".modal_opened");
+  if (evt.key === "Escape") {
+    window.closePopup(openedModal);
+  }
+}
+
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
