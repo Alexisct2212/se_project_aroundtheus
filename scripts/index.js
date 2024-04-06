@@ -74,8 +74,8 @@ function closeModalOnRemoteClick(evt) {
   }
 }
 function closeModalByEscape(evt) {
-  const openedModal = document.querySelector(".modal_opened");
   if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
     window.closePopup(openedModal);
   }
 }
