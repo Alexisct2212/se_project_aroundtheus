@@ -1,5 +1,6 @@
 // Data
-import Card from "./Card.js";
+import Card from "../components/card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
