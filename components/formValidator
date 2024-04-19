@@ -1,11 +1,12 @@
 export default class FormValidator {
-  constructor(config, formElement) {
-    this._formSelector = config.formSelector;
+  constructor(config, _formElement) {
+    this._formElement = formElement;
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
+    this._setEventListener();
   }
   _showInputError(inputEl) {
     const errorMessageEl = this._formElement.querySelector(
@@ -25,7 +26,7 @@ export default class FormValidator {
   }
   _checkInputValidity(inputEl) {
     if (!inputEl.validity.valid) {
-      this._showInputError(inputEl, inputEl.validationMessage);
+      this._showInputError(inputEl);
       return;
     }
     this._hideInputError(inputEl);
@@ -42,14 +43,13 @@ export default class FormValidator {
   _hasInvalidInput(inputList) {
     return !inputList.every((inputEl) => inputEl.validity.valid);
   }
-  _setEventListener(formEl, options) {
-    const { inputSelector, submitButtonSelector } = options;
-    const inputEls = [...formEl.querySelectorAll(inputSelector)];
-    const submitButton = formEl.querySelector(submitButtonSelector);
+  _setEventListener() {
+    const inputEls = [...formEl.querySelectorAll(this._inputSelector)];
+    const submitButton = formEl.querySelector(this._submitButtonSelector);
     inputEls.forEach((inputEl) => {
-      inputEl.addEventListener("input", (e) => {
-        this._checkInputValidity(formEl, inputEl, options);
-        toggleButtonState(inputEls, submitButton, options);
+      inputEl.addEventListener("input", () => {
+        this._checkInputValidity(inputEl);
+        toggleButtonState(inputEls, submitButton);
       });
     });
   }
@@ -69,5 +69,8 @@ const FormValidationConfig = {
   errorClass: "modal__error_visible",
 };
 
-const addFormValidator = new FormValidator(FormValidationConfig);
+const addFormValidator = new FormValidator(
+  FormValidationConfig,
+  document.querySelector("#card-template")
+);
 addFormValidator.enableValidation();
