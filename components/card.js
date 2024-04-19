@@ -46,9 +46,10 @@ export default class Card {
       });
 
     this._cardImageElement.addEventListener("click", () => {
-      this._handleImageClick(this);
+      this._handleImageClick(this._cardImageElement);
     });
   }
+  // event handler elements
   _handleLikeIcon() {
     this._cardElement
       .querySelector(".card__like-button")
@@ -58,7 +59,16 @@ export default class Card {
     this._cardElement.remove();
     this._cardElement = null;
   }
-  _handleImageClick() {}
+  _handleImageClick() {
+    const previewImageUrl = this._modal.querySelector(".preview__image");
+    const previewImageDescription = this._modal.querySelector(
+      ".preview__description-image"
+    );
+    this._openModal();
+    previewImageUrl.src = this._link;
+    previewImageUrl.alt = this._name;
+    previewImageDescription.textContent = this._name;
+  }
 
   _openModal() {
     this._modal.classList.add("modal_opened");
