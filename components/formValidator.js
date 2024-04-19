@@ -1,17 +1,14 @@
 export default class FormValidator {
-  constructor(config, _formElement) {
-    this._formElement = formElement;
+  constructor(config, formElement) {
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
-    this._setEventListener();
+    this._formElement = formElement;
   }
   _showInputError(inputEl) {
-    const errorMessageEl = this._formElement.querySelector(
-      `#${inputEl.id}-error`
-    );
+    const errorMessageEl = formElement.querySelector(`#${inputEl.id}-error`);
     inputEl.classList.add(this._inputErrorClass);
     errorMessageEl.textContent = inputEl.validationMessage;
     errorMessageEl.classList.add(this._errorClass);
@@ -54,23 +51,13 @@ export default class FormValidator {
     });
   }
 
-  enableValidation() {
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
+  enableValidation(options) {
+    const formEls = [...document.querySelectorAll(options.formSelector)];
+    formEls.forEach((formEl) => {
+      formEl.addEventListener("submit", (e) => {
+        e.preventDefault();
+      });
+      _setEventListener();
     });
-    _setEventListener();
   }
 }
-const FormValidationConfig = {
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-const addFormValidator = new FormValidator(
-  FormValidationConfig,
-  document.querySelector("#card-template")
-);
-addFormValidator.enableValidation();
