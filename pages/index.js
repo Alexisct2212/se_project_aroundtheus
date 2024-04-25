@@ -83,41 +83,12 @@ function closeModalByEscape(evt) {
     window.closePopup(openedModal);
   }
 }
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".block");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-  cardTitleEl.textContent = cardData.name;
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-
-  // preview Image part
-  const previewImageModal = document.querySelector(".preview__modal");
-  const previewImageUrl = previewImageModal.querySelector(".preview__image");
-  const previewImageDescription = previewImageModal.querySelector(
-    ".preview__description-image"
-  );
-  cardImageEl.addEventListener("click", () => {
-    openModal(previewImageModal);
-    previewImageUrl.src = cardData.link;
-    previewImageUrl.alt = cardTitleEl.textContent;
-    previewImageDescription.textContent = cardTitleEl.textContent;
-  });
-  return cardElement;
-}
-
 function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
+  const cardInstance = new Card(cardData, "#card-template"); // Use a different variable name for the instance
+  const cardElement = cardInstance.generateCard(); // Call generateCard method on cardInstance
   wrapper.prepend(cardElement);
 }
+
 // Event Handlers
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
