@@ -51,10 +51,10 @@ export default class FormValidator {
   _setEventListener(formEl) {
     const inputEls = Array.from(formEl.querySelectorAll(this._inputSelector));
     const submitButton = formEl.querySelector(this._submitButtonSelector);
-
     inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", () => {
         this._checkInputValidity(inputEl);
+
         this._toggleButtonState(inputEls, submitButton);
       });
     });
@@ -70,15 +70,3 @@ export default class FormValidator {
     });
   }
 }
-
-const formValidatorConfig = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-const formValidator = new FormValidator(formValidatorConfig);
-formValidator.enableValidation();

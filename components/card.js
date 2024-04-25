@@ -23,12 +23,6 @@ export default class Card {
       .addEventListener("click", () => {
         this._handleDeleteCard();
       });
-
-    this._cardElement
-      .querySelector(".card__image")
-      .addEventListener("click", () => {
-        this._handleImageClick();
-      });
   }
 
   _handleLikeIcon() {
@@ -40,19 +34,6 @@ export default class Card {
   _handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
-
-  _handleImageClick() {
-    const previewImageModal = document.querySelector(".preview__modal");
-    const previewImageUrl = previewImageModal.querySelector(".preview__image");
-    const previewImageDescription = previewImageModal.querySelector(
-      ".preview__description-image"
-    );
-
-    openModal(previewImageModal);
-    previewImageUrl.src = this._link;
-    previewImageUrl.alt = this._name;
-    previewImageDescription.textContent = this._name;
   }
 
   generateCard() {
