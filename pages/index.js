@@ -131,14 +131,15 @@ function closeModalByEscape(evt) {
     window.closePopup(openedModal);
   }
 }
-
+// card function imported
 function renderCard(cardData, wrapper) {
-  const cardInstance = new Card(cardData, "#card-template"); // Use a different variable name for the instance
+  const cardInstance = new Card(cardData, "#card-template", openModal); // Use a different variable name for the instance
 
   const cardElement = cardInstance.generateCard(); // Call generateCard method on cardInstance
 
   wrapper.prepend(cardElement);
 }
+// Instantiate Card object
 
 // Event Handlers
 
@@ -188,9 +189,7 @@ initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-
   const name = cardTitleInput.value;
-
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
   addCardFormElement.reset();
@@ -198,6 +197,9 @@ function handleAddCardFormSubmit(evt) {
 }
 
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
+addCardFormElement.addEventListener("reset", () => {
+  addCardFormValidator.toggleButtonState();
+});
 
 //form Validator function
 

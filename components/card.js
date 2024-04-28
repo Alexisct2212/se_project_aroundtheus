@@ -1,10 +1,11 @@
 export default class Card {
-  constructor(cardData, templateSelector) {
+  constructor(cardData, templateSelector, openModalFunction) {
     this._cardData = cardData;
     this._templateSelector = templateSelector;
     this._link = cardData.link;
     this._name = cardData.name;
     this._element = null;
+    this._openModal = openModalFunction; // Reference to the openModal function
   }
 
   _getTemplate() {
@@ -12,6 +13,7 @@ export default class Card {
     const cardElement = cardTemplate.content.cloneNode(true);
     return cardElement;
   }
+
   _setEventListeners() {
     const likeButton = this._element.querySelector(".card__like-button");
     likeButton.addEventListener("click", () => {
@@ -28,9 +30,9 @@ export default class Card {
       this._handleImageClick();
     });
   }
-  // function for the cards
+
   _handleDeleteCard() {
-    this._element.remove();
+    this._element.remove(); // Remove the card element from the DOM
     this._element = null;
   }
 
@@ -41,7 +43,7 @@ export default class Card {
       ".preview__description-image"
     );
 
-    openModal(previewImageModal);
+    this._openModal(previewImageModal); // Call openModal function
     previewImageUrl.src = this._cardData.link;
     previewImageUrl.alt = this._cardData.name;
     previewImageDescription.textContent = this._cardData.name;
