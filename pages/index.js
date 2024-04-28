@@ -139,8 +139,16 @@ function renderCard(cardData, wrapper) {
 
   wrapper.prepend(cardElement);
 }
-// Instantiate Card object
-
+// deleteCardButton
+function handleDeleteCardClick(event) {
+  const deleteButton = event.target.closest(".card__delete-button");
+  if (deleteButton) {
+    const cardElement = deleteButton.closest(".card");
+    cardElement.remove(); // Remove the card element from the DOM
+  }
+}
+// Add event listener for delete card button clicks using event delegation
+cardListEl.addEventListener("click", handleDeleteCardClick);
 // Event Handlers
 
 profileEditButton.addEventListener("click", () => {
@@ -161,7 +169,7 @@ previewImageCloseButton.addEventListener("click", () =>
   closePopup(previewImageModalCard)
 );
 
-// previe Image part
+// preview Image part
 
 profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
