@@ -125,7 +125,7 @@ function closeModalOnRemoteClick(evt) {
 }
 
 function closeModalByEscape(evt) {
-  if (evt.key === "Escape") {
+  if (evt.key === "escape") {
     const openedModal = document.querySelector(".modal_opened");
 
     window.closePopup(openedModal);
@@ -140,7 +140,7 @@ function renderCard(cardData, wrapper) {
   wrapper.prepend(cardElement);
 }
 // deleteCardButton
-function handleDeleteCardClick(event) {
+function DeleteCard(event) {
   const deleteButton = event.target.closest(".card__delete-button");
   if (deleteButton) {
     const cardElement = deleteButton.closest(".card");
@@ -148,7 +148,7 @@ function handleDeleteCardClick(event) {
   }
 }
 // Add event listener for delete card button clicks using event delegation
-cardListEl.addEventListener("click", handleDeleteCardClick);
+cardListEl.addEventListener("click", DeleteCard);
 // Event Handlers
 
 profileEditButton.addEventListener("click", () => {
@@ -194,7 +194,6 @@ addCardProfileCloseButton.addEventListener("click", () =>
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 //
-
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   const name = cardTitleInput.value;
@@ -205,9 +204,6 @@ function handleAddCardFormSubmit(evt) {
 }
 
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
-addCardFormElement.addEventListener("reset", () => {
-  addCardFormValidator.toggleButtonState();
-});
 
 //form Validator function
 
@@ -225,10 +221,16 @@ const formValidatorConfig = {
   errorClass: "modal__error_visible",
 };
 
-const profileEditFormValidator = new FormValidator(formValidatorConfig);
+const profileEditFormValidator = new FormValidator(
+  formValidatorConfig,
+  profileEditForm
+);
 
 profileEditFormValidator.enableValidation();
 
-const addCardFormValidator = new FormValidator(formValidatorConfig);
+const addCardFormValidator = new FormValidator(
+  formValidatorConfig,
+  addCardFormElement
+);
 
 addCardFormValidator.enableValidation();
