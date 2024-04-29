@@ -87,7 +87,7 @@ const addCardModal = document.querySelector("#add-card-modal");
 
 const addCardProfileCloseButton = addCardModal.querySelector(".modal__close");
 
-const cardTitleInput = addCardFormElement.querySelector("#modal__input-title");
+const cardTitleInput = addCardFormElement.querySelector("#modal__input-text");
 
 const cardUrlInput = addCardFormElement.querySelector("#modal__input-link");
 
@@ -139,16 +139,6 @@ function renderCard(cardData, wrapper) {
 
   wrapper.prepend(cardElement);
 }
-// deleteCardButton
-function DeleteCard(event) {
-  const deleteButton = event.target.closest(".card__delete-button");
-  if (deleteButton) {
-    const cardElement = deleteButton.closest(".card");
-    cardElement.remove(); // Remove the card element from the DOM
-  }
-}
-// Add event listener for delete card button clicks using event delegation
-cardListEl.addEventListener("click", DeleteCard);
 // Event Handlers
 
 profileEditButton.addEventListener("click", () => {
