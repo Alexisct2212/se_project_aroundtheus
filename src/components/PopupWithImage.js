@@ -5,10 +5,9 @@ export default class PopupWithImage extends Popup {
     super(popupSelector);
   }
 
-  open(name, link) {
-    const imagePopupElement = this._popupElement.querySelector(".form__image");
-    const imagePopupCaption =
-      this._popupElement.querySelector(".form__image-title");
+  open({ name, link }) {
+    const imagePopupElement = this._popupElement.querySelector(".card__image");
+    const imagePopupCaption = this._popupElement.querySelector(".block");
 
     imagePopupElement.src = link;
     imagePopupCaption.textContent = name;

@@ -5,7 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import utils from "../utils/utils.js";
+import utils from "../utils/constants.js";
 // Data
 
 const initialCards = [
@@ -59,7 +59,6 @@ const initialCards = [
 ];
 
 // DOM Elements
-
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileCloseButton = profileEditModal.querySelector(".modal__close");
@@ -107,6 +106,7 @@ function closeModalByEscape(evt) {
     window.closePopup(openedModal);
   }
 }
+
 // card function imported
 function renderCard(cardData, wrapper) {
   const cardInstance = new Card(cardData, "#card-template", openModal); // Use a different variable name for the instance
@@ -152,14 +152,7 @@ function handleAddCardFormSubmit(evt) {
 }
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 //form Validator function
-const formValidatorConfig = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
+
 const profileEditFormValidator = new FormValidator(
   formValidatorConfig,
   profileEditForm
