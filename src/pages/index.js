@@ -1,11 +1,35 @@
 import Card from "../components/card.js";
 import FormValidator from "../components/formValidator.js";
 import "../pages/index.css";
+import Popup from "../components/popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import utils from "../utils/constants.js";
+import {
+  formValidatorConfig,
+  profileEditButton,
+  profileEditModal,
+  profileCloseButton,
+  profileTitle,
+  profileTitleInput,
+  profileDescription,
+  profileDescriptionInput,
+  profileEditForm,
+  addCardFormElement,
+  cardListEl,
+  cardTemplate,
+  addNewCardButton,
+  addCardModal,
+  addCardProfileCloseButton,
+  cardTitleInput,
+  cardUrlInput,
+  previewImageModalCard,
+  previewImageCloseButton,
+  EscKey,
+  profilePicture,
+} from "../utils/constants.js";
+
 // Data
 
 const initialCards = [
@@ -59,29 +83,6 @@ const initialCards = [
 ];
 
 // DOM Elements
-const profileEditButton = document.querySelector("#profile-edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileCloseButton = profileEditModal.querySelector(".modal__close");
-const profileTitle = document.querySelector(".profile__title");
-const profileTitleInput = document.querySelector(".modal__input");
-const profileDescription = document.querySelector(".profile__description");
-const profileDescriptionInput = document.querySelector(
-  ".modal__input:last-of-type"
-);
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const addCardFormElement = document.querySelector(".add-modal__form");
-const cardListEl = document.querySelector(".cards__list");
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
-const addNewCardButton = document.querySelector(".profile__add-button");
-const addCardModal = document.querySelector("#add-card-modal");
-const addCardProfileCloseButton = addCardModal.querySelector(".modal__close");
-const cardTitleInput = addCardFormElement.querySelector("#modal__input-text");
-const cardUrlInput = addCardFormElement.querySelector("#modal__input-link");
-//preview Image Modal part
-const previewImageModalCard = document.querySelector(".preview__modal");
-const previewImageCloseButton =
-  previewImageModalCard.querySelector(".modal__close");
 // preview Image Modal part
 // Functions
 function closePopup(modal) {
@@ -106,7 +107,6 @@ function closeModalByEscape(evt) {
     window.closePopup(openedModal);
   }
 }
-
 // card function imported
 function renderCard(cardData, wrapper) {
   const cardInstance = new Card(cardData, "#card-template", openModal); // Use a different variable name for the instance

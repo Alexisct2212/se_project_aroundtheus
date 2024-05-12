@@ -35,3 +35,4 @@ export const previewImageModalCard = document.querySelector(".preview__modal");
 export const previewImageCloseButton =
   previewImageModalCard.querySelector(".modal__close");
 export const EscKey = 27;
+export const profilePicture = document.querySelector(".profile__image");

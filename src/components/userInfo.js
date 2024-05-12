@@ -1,11 +1,13 @@
-import { profileName, profileJob, profilePicture } from "../utils/constants.js";
+import {
+  profileTitle,
+  profileDescription,
+  profilePicture,
+} from "../utils/constants.js";
 
 export default class UserInfo {
-  constructor({ userName, userJob, userAvatar, userId }) {
-    this._userName = userName;
-    this._userJob = userJob;
-    this._userAvatar = userAvatar;
-    this._userId = userId;
+  constructor({ profileTitle, profileDescription }) {
+    this._profileTitle = profileTitle;
+    this._profileDescripion = profileDescription;
   }
   // Returns object with user info
   getUserInfo() {
@@ -17,10 +19,9 @@ export default class UserInfo {
     };
   }
 
-  // Take new user data to add it to page
   setUserInfo() {
-    profileName.textContent = this._userName;
-    profileJob.textContent = this._userJob;
+    profileTitle.textContent = this._userName;
+    profileDescription.textContent = this._userJob;
     profilePicture.src = this._userAvatar;
   }
 
