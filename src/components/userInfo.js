@@ -3,34 +3,33 @@ import {
   profileDescription,
   profilePicture,
 } from "../utils/constants.js";
-
 export default class UserInfo {
-  constructor({ profileTitle, profileDescription }) {
-    this._profileTitle = profileTitle;
-    this._profileDescripion = profileDescription;
+  constructor({ titleElement, descriptionElement, pictureElement }) {
+    this._profileTitleElement = titleElement;
+    this._profileDescriptionElement = descriptionElement;
+    this._profilePictureElement = pictureElement;
   }
-  // Returns object with user info
+
   getUserInfo() {
     return {
-      userName: this._userName,
-      userJob: this._userJob,
-      userAvatar: this._userAvatar,
-      userId: this._userId,
+      userName: this._profileTitleElement.textContent,
+      userJob: this._profileDescriptionElement.textContent,
+      userAvatar: this._profilePictureElement.src,
     };
   }
 
-  setUserInfo() {
-    profileTitle.textContent = this._userName;
-    profileDescription.textContent = this._userJob;
-    profilePicture.src = this._userAvatar;
+  setUserInfo({ name, job, avatar }) {
+    this._profileTitleElement.textContent = name;
+    this._profileDescriptionElement.textContent = job;
+    this._profilePictureElement.src = avatar;
   }
 
-  updateUserInfo(data) {
-    this._userName = data.name;
-    this._userJob = data.job;
+  updateUserInfo({ name, job }) {
+    this._profileTitleElement.textContent = name;
+    this._profileDescriptionElement.textContent = job;
   }
 
   setUserAvatar(imageLink) {
-    this._userAvatar = imageLink;
+    this._profilePictureElement.src = imageLink;
   }
 }
