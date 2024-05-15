@@ -5,7 +5,7 @@ export default class Card {
     this._link = cardData.link;
     this._name = cardData.name;
     this._element = null;
-    this._openModal = openModalFunction; // Reference to the openModal function
+    this._openModal = openModalFunction;
   }
 
   _getTemplate() {
