@@ -1,21 +1,20 @@
 import Popup from "../components/popup.js";
-import { cardUrlInput, profileTitle } from "../utils/constants.js";
-
 export default class PopupWithImage extends Popup {
-  constructor(templateSelector) {
-    super(templateSelector);
+  constructor(popupSelector, data) {
+    super(popupSelector);
+    this._data = data;
   }
 
   open(data) {
-    const imagePopupElement =
-      this._popupElement.querySelector(".preview__image");
-    const imagePopupCaption = this._popupElement.querySelector(
+    const previewImageModal = document.querySelector(".preview__modal");
+    const previewImageUrl = previewImageModal.querySelector(".preview__image");
+    const previewImageDescription = previewImageModal.querySelector(
       ".preview__description-image"
     );
-
-    imagePopupElement.src = cardUrlInput.data;
-    imagePopupCaption.textContent = profileTitle.data;
-    imagePopupElement.alt = profileTitle.data;
+    this._openModal(previewImageModal); // Call openModal function
+    previewImageUrl.src = this._cardData.link;
+    previewImageUrl.alt = this._cardData.name;
+    previewImageDescription.textContent = this._cardData.name;
     super.open();
   }
 }

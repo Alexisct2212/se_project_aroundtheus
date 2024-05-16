@@ -1,11 +1,10 @@
 export default class Card {
-  constructor(cardData, templateSelector, openModalFunction) {
+  constructor(cardData, templateSelector) {
     this._cardData = cardData;
     this._templateSelector = templateSelector;
     this._link = cardData.link;
     this._name = cardData.name;
     this._element = null;
-    this._openModal = openModalFunction;
   }
 
   _getTemplate() {
@@ -24,29 +23,11 @@ export default class Card {
     deleteButton.addEventListener("click", () => {
       this._handleDeleteCard();
     });
-
-    const cardImageEl = this._element.querySelector(".card__image");
-    cardImageEl.addEventListener("click", () => {
-      this._handleImageClick();
-    });
   }
 
   _handleDeleteCard() {
     this._element.remove(); // Remove the card element from the DOM
     this._element = null;
-  }
-
-  _handleImageClick() {
-    const previewImageModal = document.querySelector(".preview__modal");
-    const previewImageUrl = previewImageModal.querySelector(".preview__image");
-    const previewImageDescription = previewImageModal.querySelector(
-      ".preview__description-image"
-    );
-
-    this._openModal(previewImageModal); // Call openModal function
-    previewImageUrl.src = this._cardData.link;
-    previewImageUrl.alt = this._cardData.name;
-    previewImageDescription.textContent = this._cardData.name;
   }
 
   generateCard() {

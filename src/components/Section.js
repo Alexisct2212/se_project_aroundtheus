@@ -1,10 +1,10 @@
 export default class Section {
-  constructor({ items, renderer }, templateSelector) {
+  constructor({ items, renderer }) {
     this._items = items;
     this._renderer = renderer;
 
     // Select the container element using the selector
-    this._container = document.querySelector(templateSelector);
+    this._container = document.querySelector("#card-template");
   }
 
   // Correct method name to renderItems

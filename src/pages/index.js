@@ -67,10 +67,8 @@ const cardSection = new Section(
       renderCard(cardData, cardListEl);
     },
   },
-  "#card-list" // Pass the selector string
+  "#card-list"
 );
-
-// Correct the method name to renderItems
 cardSection.renderItems();
 
 // Card rendering function
@@ -79,14 +77,6 @@ function renderCard(cardData, wrapper) {
   const cardElement = cardInstance.generateCard();
   wrapper.prepend(cardElement);
 }
-
-// Event Handlers
-profileEditButton.addEventListener("click", () => {
-  const userInfoData = userInfo.getUserInfo();
-  profileTitleInput.value = userInfoData.title;
-  profileDescriptionInput.value = userInfoData.description;
-  editProfilePopup.open();
-});
 
 // Handle profile form submission
 const handleProfileFormSubmit = (data) => {
@@ -98,47 +88,38 @@ const editProfilePopup = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: handleProfileFormSubmit,
 });
-
 editProfilePopup.setEventListeners();
-
 // Handle add card form submission
 const handleAddCardFormSubmit = (data) => {
   renderCard({ name: data.title, link: data.link }, cardListEl);
   addCardPopup.close();
 };
-
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleFormSubmit: handleAddCardFormSubmit,
 });
 addCardPopup.setEventListeners();
-
 // Add new card button handler
 addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
 });
-
 // PopupWithImage initialization
 const popupWithImage = new PopupWithImage(previewImageModalCard);
 popupWithImage.setEventListeners();
-
 // Form Validator initialization
 const profileEditFormValidator = new FormValidator(
   formValidatorConfig,
   profileEditForm
 );
 profileEditFormValidator.enableValidation();
-
 const addCardFormValidator = new FormValidator(
   formValidatorConfig,
   addCardFormElement
 );
 addCardFormValidator.enableValidation();
-
 // UserInfo initialization
 const userInfo = new UserInfo({
   profileTitle,
   profileDescription,
   profilePicture,
 });
-//
