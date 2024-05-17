@@ -22,7 +22,6 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      // Call the private handleFormSubmit with the form values
       this._handleFormSubmit(this._getInputValues());
     });
   }
@@ -31,11 +30,7 @@ export default class PopupWithForm extends Popup {
     this._popupForm.reset();
     super.close();
   }
-  open(data) {
-    if (data) {
-      this._name.value = data.name;
-      this._job.value = data.job;
-    }
+  open() {
     super.open();
   }
 }
