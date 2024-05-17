@@ -64,20 +64,22 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      renderCard(cardData, cardListEl);
+      const cardInstance = new Card(cardData, "#card-template", open);
+      const cardElement = cardInstance.generateCard();
+      cardSection.addItem(cardElement); // Use Section class method to add items
     },
   },
-  "#card-list"
+  ".cards__list"
 );
+
 cardSection.renderItems();
 
-// Card rendering function
-function renderCard(cardData, wrapper) {
-  const cardInstance = new Card(cardData, "#card-template", open);
-  const cardElement = cardInstance.generateCard();
-  wrapper.prepend(cardElement);
-}
+// Handle card image click
+const popupWithImage = new PopupWithImage({
+  popupSelector: "#preview-image-modal",
+});
 
+popupWithImage.setEventListeners();
 // Handle profile form submission
 const handleProfileFormSubmit = (data) => {
   userInfo.setUserInfo(data);
@@ -108,9 +110,6 @@ addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
 });
 // PopupWithImage initialization
-const popupWithImage = new PopupWithImage(previewImageModalCard);
-
-popupWithImage.setEventListeners();
 //
 const userInfo = new UserInfo({
   profileTitle,
