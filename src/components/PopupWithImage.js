@@ -12,9 +12,9 @@ export default class PopupWithImage extends Popup {
       ".preview__description-image"
     );
     this._openModal(previewImageModal); // Call openModal function
-    previewImageUrl.src = this._cardData.link;
-    previewImageUrl.alt = this._cardData.name;
-    previewImageDescription.textContent = this._cardData.name;
+    previewImageUrl.src = data.link;
+    previewImageUrl.alt = data.name;
+    previewImageDescription.textContent = data.name;
     super.open();
   }
 }

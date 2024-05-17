@@ -34,5 +34,17 @@ export const cardUrlInput =
 export const previewImageModalCard = document.querySelector(".preview__modal");
 export const previewImageCloseButton =
   previewImageModalCard.querySelector(".modal__close");
+//
+export function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalByEscape);
+  modal.removeEventListener("click", closeModalOnRemoteClick);
+}
+export function openModal(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeModalByEscape);
+  modal.addEventListener("click", closeModalOnRemoteClick);
+}
+//
 export const EscKey = "Escape";
 export const profilePicture = document.querySelector(".profile__image");
