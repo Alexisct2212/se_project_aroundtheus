@@ -17,6 +17,11 @@ export default class Popup {
       this.close();
     }
   };
+  _handleRemoteClick = (e) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(evt.currentTarget);
+    }
+  };
 
   setEventListeners() {
     this._popupElement
