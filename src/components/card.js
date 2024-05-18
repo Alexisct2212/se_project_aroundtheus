@@ -5,6 +5,7 @@ export default class Card {
     this._link = cardData.link;
     this._name = cardData.name;
     this._element = null;
+    this._handleImageClick = handleImageClick;
   }
   _getTemplate() {
     const cardTemplate = document.querySelector(this._templateSelector);
@@ -22,7 +23,7 @@ export default class Card {
     });
     const cardImageEl = this._element.querySelector(".card__image");
     cardImageEl.addEventListener("click", () => {
-      handleImageClick(this._cardData);
+      this._handleImageClick;
     });
   }
   _handleDeleteCard() {
