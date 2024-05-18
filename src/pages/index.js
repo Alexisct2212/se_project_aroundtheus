@@ -59,29 +59,29 @@ const initialCards = [
   },
 ];
 // Handle card image click
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const cardInstance = new Card(
-        cardData,
-        "#card-template",
-        handleCardClick,
-        openModal
-      );
-      const cardElement = cardInstance.generateCard();
-      cardSection.addItem(cardElement);
-    },
-  },
-  ".cards__list"
-);
-cardSection.renderItems();
-// Handle card image click
-const popupWithImage = new PopupWithImage(".preview-image-modal");
+const popupWithImage = new PopupWithImage("#preview-image-modal");
 popupWithImage.setEventListeners();
 function handleCardClick(cardData) {
   popupWithImage.open(cardData);
 }
+//
+const renderCard = (cardData) => {
+  const cardInstance = new Card(cardData, "#card-template", handleCardClick);
+  const cardElement = cardInstance.generateCard();
+  cardSection.addItem(cardElement);
+};
+
+// Section initialization
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  ".cards__list"
+);
+
+cardSection.renderItems();
+// Handle card image click
 // Handle profile form submission
 const handleProfileFormSubmit = (data) => {
   userInfo.setUserInfo(data);
