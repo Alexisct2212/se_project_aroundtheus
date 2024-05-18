@@ -58,6 +58,7 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+// Handle card image click
 const cardSection = new Section(
   {
     items: initialCards,
@@ -74,62 +75,51 @@ const cardSection = new Section(
   },
   ".cards__list"
 );
-
 cardSection.renderItems();
-
 // Handle card image click
-const popupWithImage = new PopupWithImage("#preview-image-modal");
+const popupWithImage = new PopupWithImage(".preview-image-modal");
 popupWithImage.setEventListeners();
-
 function handleCardClick(cardData) {
   popupWithImage.open(cardData);
 }
-
 // Handle profile form submission
 const handleProfileFormSubmit = (data) => {
   userInfo.setUserInfo(data);
   editProfilePopup.close();
 };
-
 const editProfilePopup = new PopupWithForm({
-  popupSelector: "#profile-edit-modal",
+  popupSelector: ".profile-edit-modal",
   handleFormSubmit: handleProfileFormSubmit,
 });
 editProfilePopup.setEventListeners();
-
 // Handle add card form submission
 const handleAddCardFormSubmit = (data) => {
   const cardData = { name: data.title, link: data.link };
-  const cardInstance = new Card(cardData, "#card-template", handleCardClick);
+  const cardInstance = new Card(cardData, "#card-template", openModal);
   const cardElement = cardInstance.generateCard();
   cardSection.addItem(cardElement);
   addCardPopup.close();
 };
-
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleFormSubmit: handleAddCardFormSubmit,
 });
 addCardPopup.setEventListeners();
-
 // Add new card button handler
 addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
 });
-
 // Form Validator initialization
 const profileEditFormValidator = new FormValidator(
   formValidatorConfig,
   profileEditForm
 );
 profileEditFormValidator.enableValidation();
-
 const addCardFormValidator = new FormValidator(
   formValidatorConfig,
   addCardFormElement
 );
 addCardFormValidator.enableValidation();
-
 // UserInfo initialization
 const userInfo = new UserInfo({
   profileTitle,
@@ -143,4 +133,3 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = userInfoData.description;
   editProfilePopup.open();
 });
-// UserInfo initialization

@@ -11,7 +11,6 @@ export default class PopupWithImage extends Popup {
     const previewImageDescription = previewImageModal.querySelector(
       ".preview__description-image"
     );
-    this._openModal(previewImageModal); // Call openModal function
     previewImageUrl.src = data.link;
     previewImageUrl.alt = data.name;
     previewImageDescription.textContent = data.name;
