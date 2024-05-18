@@ -30,7 +30,7 @@ export default class Popup {
         this.close();
       });
     this._popupElement.addEventListener("click", (e) => {
-      if (e.target.classList.contains("modal")) {
+      if (e.target === this._popupElement) {
         this.close();
       }
     });

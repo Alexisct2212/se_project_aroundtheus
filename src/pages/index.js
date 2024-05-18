@@ -58,12 +58,6 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-// Handle card image click
-const popupWithImage = new PopupWithImage("#preview-image-modal");
-popupWithImage.setEventListeners();
-function handleCardClick(cardData) {
-  popupWithImage.open(cardData);
-}
 //
 const renderCard = (cardData) => {
   const cardInstance = new Card(cardData, "#card-template", handleCardClick);
@@ -71,7 +65,6 @@ const renderCard = (cardData) => {
   cardSection.addItem(cardElement);
 };
 
-// Section initialization
 const cardSection = new Section(
   {
     items: initialCards,
@@ -79,9 +72,13 @@ const cardSection = new Section(
   },
   ".cards__list"
 );
-
 cardSection.renderItems();
 // Handle card image click
+const popupWithImage = new PopupWithImage("#preview-image-modal");
+popupWithImage.setEventListeners();
+function handleCardClick(cardData) {
+  popupWithImage.open(cardData);
+}
 // Handle profile form submission
 const handleProfileFormSubmit = (data) => {
   userInfo.setUserInfo(data);
