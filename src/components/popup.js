@@ -3,7 +3,6 @@ export default class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
   }
-
   open() {
     this._popupElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscClose);
@@ -17,12 +16,11 @@ export default class Popup {
       this.close();
     }
   };
-  _handleRemoteClick = (e) => {
+  _handleRemoteClick = (evt) => {
     if (evt.target === evt.currentTarget) {
       closePopup(evt.currentTarget);
     }
   };
-
   setEventListeners() {
     this._popupElement
       .querySelector(".modal__close")

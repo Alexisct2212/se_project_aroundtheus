@@ -3,7 +3,6 @@ import FormValidator from "../components/formValidator.js";
 import "../pages/index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import Popup from "../components/popup.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import {
@@ -16,15 +15,12 @@ import {
   profileEditForm,
   addCardFormElement,
   cardListEl,
-  cardTemplate,
   addNewCardButton,
   cardTitleInput,
   cardUrlInput,
-  previewImageModalCard,
   profilePicture,
-  openModal,
-  closePopup,
 } from "../utils/constants.js";
+
 // Data
 const initialCards = [
   {
@@ -58,7 +54,6 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-//
 const renderCard = (cardData) => {
   const cardInstance = new Card(cardData, "#card-template", handleCardClick);
   const cardElement = cardInstance.generateCard();
@@ -74,7 +69,9 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 // Handle card image click
-const popupWithImage = new PopupWithImage("#preview-image-modal");
+const popupWithImage = new PopupWithImage({
+  popupSelector: ".profile-edit-modal",
+});
 popupWithImage.setEventListeners();
 function handleCardClick(cardData) {
   popupWithImage.open(cardData);
@@ -92,13 +89,13 @@ editProfilePopup.setEventListeners();
 // Handle add card form submission
 const handleAddCardFormSubmit = (data) => {
   const cardData = { name: data.title, link: data.link };
-  const cardInstance = new Card(cardData, "#card-template", openModal);
+  const cardInstance = new Card(cardData, "#card-template", open);
   const cardElement = cardInstance.generateCard();
   cardSection.addItem(cardElement);
-  addCardPopup.close();
+  addCardPopup.open();
 };
 const addCardPopup = new PopupWithForm({
-  popupSelector: "#add-card-modal",
+  popupSelector: ".add-card-modal",
   handleFormSubmit: handleAddCardFormSubmit,
 });
 addCardPopup.setEventListeners();
