@@ -101,7 +101,6 @@ const editProfilePopup = new PopupWithForm({
 });
 
 editProfilePopup.setEventListeners();
-editProfilePopup.open();
 // Handle add card form submission
 const handleAddCardFormSubmit = (data) => {
   const cardData = { name: data.title, link: data.link };
@@ -138,9 +137,8 @@ addCardFormValidator.enableValidation();
 
 // UserInfo initialization
 const userInfo = new UserInfo({
-  profileTitle,
-  profileDescription,
-  profilePicture,
+  name: ".profile__title",
+  description: ".profile__description",
 });
 
 // Profile edit button handler
