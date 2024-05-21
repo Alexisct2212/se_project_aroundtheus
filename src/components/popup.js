@@ -1,4 +1,8 @@
-import { EscKey } from "../utils/constants";
+import {
+  EscKey,
+  previewImageCloseButton,
+  profileCloseButton,
+} from "../utils/constants";
 export default class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
@@ -22,11 +26,10 @@ export default class Popup {
     }
   };
   setEventListeners() {
-    this._popupElement
-      .querySelector(".modal__close")
-      .addEventListener("click", () => {
-        this.close();
-      });
+    this._popupElement.addEventListener("click", (e) => {
+      this.open();
+    });
+
     this._popupElement.addEventListener("click", (e) => {
       if (e.target === this._popupElement) {
         this.close();

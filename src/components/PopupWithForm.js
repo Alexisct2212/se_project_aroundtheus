@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
     this._inputList = this._popupForm.querySelectorAll(".modal__input");
     this._formValues = {};
     this._inputList.forEach((input) => {
-      this._formValues[input.name] = input.value;
+      this._formValues[input.title] = input.value;
     });
     return this._formValues;
   }
