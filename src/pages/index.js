@@ -56,73 +56,61 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-
-const renderCard = (cardData) => {
-  const cardInstance = new Card(
-    cardData,
-    "#card-template",
-    handleCardClick,
-    open
-  );
-  const cardElement = cardInstance.generateCard();
-  cardSection.addItem(cardElement);
-};
-
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: renderCard,
+    renderer: (cardData) => {
+      renderCard(cardData, cardListEl);
+    },
   },
-  ".cards__list"
+  "#card-list"
 );
 
 cardSection.renderItems();
 
-// Handle card image click
-const popupWithImage = new PopupWithImage({
-  popupSelector: ".card__image", // Ensure this selector is correct
-});
-
-popupWithImage.setEventListeners();
-popupWithImage.open();
-function handleCardClick(cardData) {
-  popupWithImage.open(cardData);
+function renderCard(cardData, wrapper) {
+  const cardInstance = new Card(cardData, "#card-template", () => {
+    popupWithImage.open(cardData);
+  });
+  const cardElement = cardInstance.generateCard();
+  wrapper.prepend(cardElement);
 }
 
-// Handle profile form submission
 const handleProfileFormSubmit = (data) => {
   userInfo.setUserInfo(data);
   editProfilePopup.close();
 };
 
 const editProfilePopup = new PopupWithForm({
-  popupSelector: ".profile-edit-modal",
+  popupSelector: "#profile-edit-modal",
   handleFormSubmit: handleProfileFormSubmit,
 });
-
 editProfilePopup.setEventListeners();
-// Handle add card form submission
-const handleAddCardFormSubmit = (data) => {
-  const cardData = { name: data.title, link: data.link };
-  const cardInstance = new Card(cardData, "#card-template", handleCardClick);
-  const cardElement = cardInstance.generateCard();
-  cardSection.addItem(cardElement);
-  addCardPopup.close(); // Close the popup here
-};
+
+function handleAddCardFormSubmit(evt) {
+  evt.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  renderCard({ name, link }, cardListEl);
+  addCardFormElement.reset();
+  closePopup(addCardModal);
+}
 
 const addCardPopup = new PopupWithForm({
-  popupSelector: ".add-card-modal",
+  popupSelector: "#add-card-modal",
   handleFormSubmit: handleAddCardFormSubmit,
 });
-
 addCardPopup.setEventListeners();
 
-// Add new card button handler
 addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
 });
 
-// Form Validator initialization
+const popupWithImage = new PopupWithImage({
+  popupSelector: ".preview__modal",
+});
+popupWithImage.setEventListeners();
+
 const profileEditFormValidator = new FormValidator(
   formValidatorConfig,
   profileEditForm
@@ -135,16 +123,15 @@ const addCardFormValidator = new FormValidator(
 );
 addCardFormValidator.enableValidation();
 
-// UserInfo initialization
 const userInfo = new UserInfo({
-  name: ".profile__title",
-  description: ".profile__description",
+  profileTitle,
+  profileDescription,
+  profilePicture,
 });
 
-// Profile edit button handler
 profileEditButton.addEventListener("click", () => {
-  const userInfoData = userInfo.getUserInfo();
-  profileTitleInput.value = userInfoData.title;
-  profileDescriptionInput.value = userInfoData.description;
+  const userData = userInfo.getUserInfo();
+  profileTitleInput.value = userData.title;
+  profileDescriptionInput.value = userData.description;
   editProfilePopup.open();
 });

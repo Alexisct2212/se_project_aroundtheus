@@ -22,9 +22,12 @@ export default class Popup {
     }
   };
   setEventListeners() {
-    this._popupElement.querySelector(".modal__close");
-    this._popupElement.addEventListener("click", () => {
-      this.open();
+    const closebutton = this._popupElement.querySelector(".modal__close");
+
+    this._popupElement.addEventListener("click", (e) => {
+      if (closebutton) {
+        closebutton.addEventListener("click", () => this.close());
+      }
     });
     this._popupElement.addEventListener("click", (e) => {
       if (e.target === this._popupElement) {
