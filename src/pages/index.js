@@ -16,6 +16,7 @@ import {
   addCardFormElement,
   cardListEl,
   addNewCardButton,
+  addCardModal,
   cardTitleInput,
   cardUrlInput,
   profilePicture,
@@ -110,7 +111,9 @@ const popupWithImage = new PopupWithImage({
   popupSelector: ".preview__modal",
 });
 popupWithImage.setEventListeners();
-
+addCardModal.addEventListener("click", () => {
+  popupWithImage.open();
+});
 const profileEditFormValidator = new FormValidator(
   formValidatorConfig,
   profileEditForm
