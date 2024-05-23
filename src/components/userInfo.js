@@ -1,18 +1,18 @@
 export default class UserInfo {
-  constructor({ profileTitle, profileDescription, profilePicture }) {
+  constructor({ profileTitle, profileDescription }) {
     this._profileTitle = profileTitle;
     this._profileDescription = profileDescription;
-    this._profilePicture = profilePicture;
   }
 
   getUserInfo() {
     return {
-      userName: this._profileTitle.textContent,
-      userJob: this._profileDescription.textContent,
+      name: this._profileTitle.textContent,
+      job: this._profileDescription.textContent,
     };
   }
-  setUserInfo({ name, job }) {
-    this._profileTitleElement.textContent = name;
-    this._profileDescriptionElement.textContent = job;
+
+  setUserInfo(cardData) {
+    this._profileTitle.textContent = cardData.name;
+    this._profileDescription.textContent = cardData.job;
   }
 }

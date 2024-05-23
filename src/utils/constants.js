@@ -1,4 +1,4 @@
-export const formValidatorConfig = {
+export const options = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",

@@ -6,7 +6,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import {
-  formValidatorConfig,
   profileEditButton,
   profileTitle,
   profileTitleInput,
@@ -22,6 +21,7 @@ import {
   profilePicture,
   openModal,
   closePopup,
+  options,
 } from "../utils/constants.js";
 
 // Data
@@ -81,21 +81,16 @@ const handleProfileFormSubmit = (data) => {
   userInfo.setUserInfo(data);
   editProfilePopup.close();
 };
+const handleAddCardFormSubmit = (data) => {
+  renderCard({ name: data.title, link: data.link }, cardListEl);
+  addCardPopup.close();
+};
 
 const editProfilePopup = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: handleProfileFormSubmit,
 });
 editProfilePopup.setEventListeners();
-
-function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  renderCard({ name, link }, cardListEl);
-  addCardFormElement.reset();
-  closePopup(addCardModal);
-}
 
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
@@ -111,19 +106,11 @@ const popupWithImage = new PopupWithImage({
   popupSelector: ".preview__modal",
 });
 popupWithImage.setEventListeners();
-addCardModal.addEventListener("click", () => {
-  popupWithImage.open();
-});
-const profileEditFormValidator = new FormValidator(
-  formValidatorConfig,
-  profileEditForm
-);
+
+const profileEditFormValidator = new FormValidator(options, profileEditForm);
 profileEditFormValidator.enableValidation();
 
-const addCardFormValidator = new FormValidator(
-  formValidatorConfig,
-  addCardFormElement
-);
+const addCardFormValidator = new FormValidator(options, addCardFormElement);
 addCardFormValidator.enableValidation();
 
 const userInfo = new UserInfo({
@@ -134,7 +121,7 @@ const userInfo = new UserInfo({
 
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
-  profileTitleInput.value = userData.title;
-  profileDescriptionInput.value = userData.description;
+  profileTitleInput.name = userData.value;
+  profileDescriptionInput.job = userData.value;
   editProfilePopup.open();
 });
