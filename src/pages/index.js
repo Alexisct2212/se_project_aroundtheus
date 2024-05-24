@@ -101,6 +101,7 @@ addCardPopup.setEventListeners();
 
 addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
+  addCardFormValidator.toggleButtonState();
 });
 
 const popupWithImage = new PopupWithImage({
@@ -117,18 +118,11 @@ addCardFormValidator.enableValidation();
 const userInfo = new UserInfo({
   profileTitle,
   profileDescription,
-  profilePicture,
 });
 
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
-  console.log("Profile Edit Clicked - User Data:", userData); // Debugging
-  console.log("Setting profileTitleInput.value to:", userData.name); // Debugging
-  profileTitleInput.value = userData.name; // Assign name value
-  console.log(
-    "profileTitleInput.value after assignment:",
-    profileTitleInput.value
-  ); // Debugging
+  profileTitleInput.value = userData.name;
   profileDescriptionInput.value = userData.job;
   editProfilePopup.open();
 });

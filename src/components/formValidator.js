@@ -66,7 +66,11 @@ export default class FormValidator {
     const formEl = this._formEl;
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
+      this.toggleButtonState();
     });
     this._setEventListener(formEl);
+  }
+  toggleButtonState() {
+    this._toggleButtonState();
   }
 }
