@@ -15,7 +15,12 @@ import {
   addCardFormElement,
   cardListEl,
   addNewCardButton,
+  addCardModal,
+  cardTitleInput,
+  cardUrlInput,
   profilePicture,
+  openModal,
+  closePopup,
   options,
 } from "../utils/constants.js";
 
@@ -23,30 +28,35 @@ import {
 const initialCards = [
   {
     name: "Yosemite Valley",
+    description: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
   },
   {
     name: "Lake Louise",
+    description: "Lake Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
   {
     name: "Bald Mountains",
+    description: "Bald Mountains",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
   },
   {
     name: "Latemar",
+    description: "Latemar",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
   },
   {
     name: "Vanoise National Park",
+    description: "Vanoise National Park",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
   },
   {
     name: "Lago di Braies",
+    description: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-
 const cardSection = new Section(
   {
     items: initialCards,
@@ -60,9 +70,7 @@ const cardSection = new Section(
 cardSection.renderItems();
 
 function renderCard(cardData, wrapper) {
-  console.log("Rendering card with cardData:", cardData);
   const cardInstance = new Card(cardData, "#card-template", () => {
-    console.log("Opening popup with cardData:", cardData);
     popupWithImage.open(cardData);
   });
   const cardElement = cardInstance.generateCard();
@@ -75,8 +83,7 @@ const handleProfileFormSubmit = (data) => {
 };
 
 const handleAddCardFormSubmit = (data) => {
-  console.log("Adding card with data:", data);
-  renderCard({ link: data.link, name: data.title }, cardListEl);
+  renderCard({ name: data.title, link: data.link }, cardListEl);
   addCardPopup.close();
 };
 
@@ -115,8 +122,13 @@ const userInfo = new UserInfo({
 
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
-  console.log("Editing profile with userData:", userData);
-  profileTitleInput.value = userData.name;
+  console.log("Profile Edit Clicked - User Data:", userData); // Debugging
+  console.log("Setting profileTitleInput.value to:", userData.name); // Debugging
+  profileTitleInput.value = userData.name; // Assign name value
+  console.log(
+    "profileTitleInput.value after assignment:",
+    profileTitleInput.value
+  ); // Debugging
   profileDescriptionInput.value = userData.job;
   editProfilePopup.open();
 });
