@@ -42,9 +42,9 @@ export default class Card {
     const cardImageEl = this._element.querySelector(".card__image");
     const cardTitleEl = this._element.querySelector(".block");
 
-    cardImageEl.src = this._cardData.link;
-    cardImageEl.alt = this._cardData.name;
-    cardTitleEl.textContent = this._cardData.name;
+    cardImageEl.src = this._link;
+    cardImageEl.alt = this._name;
+    cardTitleEl.textContent = this._name;
 
     this._setEventListeners();
 
