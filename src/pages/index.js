@@ -71,15 +71,19 @@ const cardSection = new Section(
   },
   ".cards__list"
 );
-
 cardSection.renderItems();
+//
 const handleProfileFormSubmit = (data) => {
   userInfo.setUserInfo({ name: data.name, job: data.job });
   editProfilePopup.close();
 };
 
 const handleAddCardFormSubmit = (data) => {
-  const cardElement = createCard({ name: data.title, link: data.link });
+  const cardData = { name: data.title, link: data.link };
+  const cardInstance = new Card(cardData, "#card-template", () => {
+    popupWithImage.open(cardData);
+  });
+  const cardElement = cardInstance.generateCard();
   cardSection.addItem(cardElement);
   addCardPopup.close();
 };
