@@ -57,33 +57,30 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+//
 const cardSection = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      renderCard(cardData, cardListEl);
+      const cardInstance = new Card(cardData, "#card-template", () => {
+        popupWithImage.open(cardData);
+      });
+      const cardElement = cardInstance.generateCard();
+      cardSection.addItem(cardElement);
     },
   },
-  "#card-list"
+  ".cards__list"
 );
 
 cardSection.renderItems();
-
-function renderCard(cardData, wrapper) {
-  const cardInstance = new Card(cardData, "#card-template", () => {
-    popupWithImage.open(cardData);
-  });
-  const cardElement = cardInstance.generateCard();
-  wrapper.prepend(cardElement);
-}
-
 const handleProfileFormSubmit = (data) => {
   userInfo.setUserInfo({ name: data.name, job: data.job });
   editProfilePopup.close();
 };
 
 const handleAddCardFormSubmit = (data) => {
-  renderCard({ name: data.title, link: data.link }, cardListEl);
+  const cardElement = createCard({ name: data.title, link: data.link });
+  cardSection.addItem(cardElement);
   addCardPopup.close();
 };
 
