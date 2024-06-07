@@ -42,7 +42,7 @@
     <footer class="footer page__section">
       <p class="footer__copyright">&copy; 2024 Around the U.S</p>
     </footer>
-    <!-- modal editprofile-->
+    <!-- modal edit profile-->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
@@ -74,26 +74,59 @@
         </form>
       </div>
     </div>
-
     <!-- new modal add-Block-->
-
+    
     <div class="modal" id="add-card-modal">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
         <h3 class="modal__heading">New Place</h3>
         <form class="add-modal__form modal__form">
           <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            class="modal__input"
-            id="modal__input-text"
-            minlength="1"
-            maxlength="30"
-            required
+          type="text"
+          name="title"
+          placeholder="Title"
+          class="modal__input"
+          id="modal__input-text"
+          minlength="1"
+          maxlength="30"
+          required
           />
           <span class="modal__error" id="modal__input-text-error"></span>
           <input
+          type="url"
+          name="link"
+          placeholder="Image link"
+          class="modal__input"
+          id="modal__input-link"
+          required
+          />
+          <span class="modal__error" id="modal__input-link-error"></span>
+          <button
+          class="modal__button modal__button_disabled"
+          type="submit"
+          disabled
+          >
+          Create
+        </button>
+      </form>
+    </div>
+  </div>
+  <!-- delete cards-->
+  <div class="modal" id="delete__Card-modal">
+    <div class="modal__container-delete-card" >
+      <button class="modal__close" type="button"></button>
+      <h3 class="modal__heading">Are you sure?</h3>
+      <button class="modal__button" type="submit">Yes</button>
+    </form>
+  </div>
+</div>
+<!-- delete cards-->
+<!-- change profile pic -->
+<div class="modal" id="change__profile_picture">
+  <div class="modal__container-profile-pic" >
+    <button class="modal__close" type="button"></button>
+    <h3 class="modal__heading">Change profile picture</h3>
+    <input
             type="url"
             name="link"
             placeholder="Image link"
@@ -102,31 +135,26 @@
             required
           />
           <span class="modal__error" id="modal__input-link-error"></span>
-          <button
-            class="modal__button modal__button_disabled"
-            type="submit"
-            disabled
-          >
-            Create
-          </button>
-        </form>
-      </div>
-    </div>
-    <!-- open image modal-->
-    <div class="modal preview__modal">
-      <div class="modal__container-preview">
-        <button
-          class="modal__close preview__close-button"
-          type="button"
-        ></button>
-        <img src="" alt="" class="preview__image" />
-        <p class="preview__description-image"></p>
-      </div>
-    </div>
-    <!-- add image modal-->
-    <template id="card-template">
-      <li class="card">
-        <img src="" class="card__image" alt="" style="cursor: pointer" />
+      <button class="modal__button" type="submit">Save</button>
+    </form>
+  </div>
+</div>
+<!-- change profile pic-->
+<!-- open image modal-->
+<div class="modal preview__modal">
+  <div class="modal__container-preview">
+    <button
+    class="modal__close preview__close-button"
+    type="button"
+    ></button>
+    <img src="" alt="" class="preview__image" />
+    <p class="preview__description-image"></p>
+  </div>
+</div>
+<!-- add image modal-->
+<template id="card-template">
+  <li class="card">
+    <img src="" class="card__image" alt="" style="cursor: pointer" />
         <button class="card__delete-button" type="button"></button>
         <div class="card__description">
           <h2 class="block"></h2>

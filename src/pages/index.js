@@ -23,6 +23,7 @@ import {
   closePopup,
   options,
 } from "../utils/constants.js";
+import Api from "../components/Api.js";
 
 // Data
 const initialCards = [
@@ -57,6 +58,14 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+//API
+const api = new Api({
+  baseUrl: " https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "6e534341-d980-4c10-9e46-fc77e365fd2e",
+    "Content-Type": "application/json",
+  },
+});
 //
 const cardSection = new Section(
   {

@@ -28,6 +28,24 @@
   height: 330px;
   width: 430px;
 }
+.modal__container-delete-card {
+  position: relative;
+  padding: 36px;
+  background-color: #fff;
+  margin: auto;
+  border-radius: 10px;
+  height: 181px;
+  width: 430px;
+}
+.modal__container-profile-pic {
+  position: relative;
+  padding: 36px;
+  background-color: #fff;
+  margin: auto;
+  border-radius: 10px;
+  height: 272px;
+  width: 430px;
+}
 .modal__close {
   border: none;
   background-color: transparent;
