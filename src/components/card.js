@@ -1,11 +1,18 @@
 export default class Card {
-  constructor(cardData, templateSelector, handleImageClick) {
+  constructor(
+    cardData,
+    templateSelector,
+    handleImageClick,
+    handleDeleteCard,
+    handleLikeButton
+  ) {
     this._cardData = cardData;
     this._templateSelector = templateSelector;
     this._link = cardData.link;
     this._name = cardData.name;
     this._element = null;
     this._handleImageClick = handleImageClick;
+    this._handleLikeButton = handleLikeButton;
   }
 
   _getTemplate() {
@@ -16,15 +23,19 @@ export default class Card {
 
   _setEventListeners() {
     const likeButton = this._element.querySelector(".card__like-button");
-    likeButton.addEventListener("click", () => {
-      likeButton.classList.toggle("card__like-button_active");
+    likeButton.addEventListener("click", (e) => {
+      e.preventdefault();
+      if (e.target === this._likeButton) {
+        this._handleLikeButton(this);
+      }
     });
+    //delete form with popup
 
     const deleteButton = this._element.querySelector(".card__delete-button");
     deleteButton.addEventListener("click", () => {
-      this._handleDeleteCard();
+      this._handleDeleteCard(this);
     });
-
+    //
     const cardImageEl = this._element.querySelector(".card__image");
     cardImageEl.addEventListener("click", () => {
       this._handleImageClick(this._cardData); // Call the function with the required arguments
@@ -33,7 +44,7 @@ export default class Card {
 
   _handleDeleteCard() {
     this._element.remove(); // Remove the card element from the DOM
-    this._element = null;
+    //this._element = null;
   }
 
   generateCard() {

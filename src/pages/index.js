@@ -1,4 +1,4 @@
-import Card from "../components/Card.js";
+import Card from "../components/card.js";
 import FormValidator from "../components/FormValidator.js";
 import "../pages/index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -24,6 +24,7 @@ import {
   options,
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
+import Popup from "../components/popup.js";
 
 // Data
 const initialCards = [
@@ -60,11 +61,15 @@ const initialCards = [
 ];
 //API
 const api = new Api({
-  baseUrl: " https://around-api.en.tripleten-services.com/v1",
+  baseUrl: " https://around-api.en.tripleten-services.com",
   headers: {
-    authorization: "6e534341-d980-4c10-9e46-fc77e365fd2e",
+    authorization: "be6d8597-bde7-4a38-a9e9-73e2c22d9b57",
     "Content-Type": "application/json",
   },
+});
+//
+api.editProfile().then((cards) => {
+  console.log(cards);
 });
 //
 const cardSection = new Section(
@@ -135,4 +140,29 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = userData.name;
   profileDescriptionInput.value = userData.job;
   editProfilePopup.open();
+});
+profileEditButton.addEventListener("click", () => {
+  const userData = userInfo.getUserInfo();
+  profileTitleInput.value = userData.name;
+  profileDescriptionInput.value = userData.job;
+  editProfilePopup.open();
+}); //  edit profile picture
+const editProfilePic = new PopupWithForm({
+  popupSelector: "#change__profile_picture",
+  handleFormSubmit: handleProfileFormSubmit,
+});
+editProfilePic.setEventListeners();
+// delete card-modal
+const deleteCardModal = new PopupWithForm({
+  popupSelector: "#delete__card-modal",
+  handleFormSubmit: handleProfileFormSubmit,
+});
+deleteCardModal.setEventListeners();
+// open new popups function
+const avtarEditButton = document.querySelector(".profile__image-overlay");
+const avatarEditForm = document.querySelector("#change__profile_picture");
+const avatarLinkInput = document.querySelector("#modal__input-link");
+avatarEditButton.addEventListener("click", () => {
+  editProfilePic.open();
+  avatarEditFormValidator.resetValidation();
 });
