@@ -48,3 +48,6 @@ export function openModal(modal) {
 //
 export const EscKey = "Escape";
 export const profilePicture = document.querySelector(".profile__image");
+export const profileAvatarEditButton = document.querySelector(
+  ".profile__image-overlay"
+);

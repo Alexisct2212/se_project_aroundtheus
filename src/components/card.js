@@ -23,12 +23,10 @@ export default class Card {
 
   _setEventListeners() {
     const likeButton = this._element.querySelector(".card__like-button");
-    likeButton.addEventListener("click", (e) => {
-      e.preventdefault();
-      if (e.target === this._likeButton) {
-        this._handleLikeButton(this);
-      }
+    likeButton.addEventListener("click", () => {
+      likeButton.classList.toggle("card__like-button_active");
     });
+
     //delete form with popup
 
     const deleteButton = this._element.querySelector(".card__delete-button");
