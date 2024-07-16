@@ -25,6 +25,7 @@ import {
   options,
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
+import PopupWithConfirmation from "../components/PopUpWithConfirmation.js";
 
 // Data
 const initialCards = [
@@ -94,15 +95,41 @@ const popupWithImage = new PopupWithImage({
 });
 popupWithImage.setEventListeners();
 
+// Delete Confirmation Popup
+/*const deleteCardPopup = new PopupWithConfirmation({
+  popupSelector: "#delete__card-modal",
+  handleFormSubmit: (cardId) => {
+    console.log("Delete card ID:", cardId); // Debugging line
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        document.getElementById(cardId).remove();
+        deleteCardPopup.close();
+      })
+      .catch((err) => {
+        console.error("Delete card error:", err);
+      });
+  },
+});
+deleteCardPopup.setEventListeners();
+*/
 // Card Section
 const cardSection = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      const cardInstance = new Card(cardData, "#card-template", () => {
-        popupWithImage.open(cardData);
-      });
+      const cardInstance = new Card(
+        cardData,
+        "#card-template",
+        () => {
+          popupWithImage.open(cardData);
+        },
+        (cardId) => {
+          deleteCardPopup.open(cardId);
+        }
+      );
       const cardElement = cardInstance.generateCard();
+      cardElement.id = cardData._id;
       cardSection.addItem(cardElement);
     },
   },
@@ -119,7 +146,7 @@ const handleProfileFormSubmit = (data) => {
       editProfilePopup.close();
     })
     .catch((err) => {
-      console.log(err);
+      console.error("Profile update error:", err);
     });
 };
 
@@ -127,15 +154,23 @@ const handleAddCardFormSubmit = (data) => {
   api
     .addCard(data.title, data.link)
     .then((res) => {
-      const cardInstance = new Card(res, "#card-template", () => {
-        popupWithImage.open(res);
-      });
+      const cardInstance = new Card(
+        res,
+        "#card-template",
+        () => {
+          popupWithImage.open(res);
+        },
+        (cardId) => {
+          deleteCardPopup.open(cardId);
+        }
+      );
       const cardElement = cardInstance.generateCard();
+      cardElement.id = res._id;
       cardSection.addItem(cardElement);
       addCardPopup.close();
     })
     .catch((err) => {
-      console.log(err);
+      console.error("Add card error:", err);
     });
 };
 
@@ -147,7 +182,7 @@ const handleAvatarFormSubmit = (data) => {
       editAvatarPopup.close();
     })
     .catch((err) => {
-      console.log(err);
+      console.error("Avatar update error:", err);
     });
 };
 
