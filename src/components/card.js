@@ -13,6 +13,7 @@ export default class Card {
     this._element = null;
     this._handleImageClick = handleImageClick;
     this._handleLikeButton = handleLikeButton;
+    this._handleDeleteCard = handleDeleteCard;
   }
 
   _getTemplate() {
@@ -27,22 +28,15 @@ export default class Card {
       likeButton.classList.toggle("card__like-button_active");
     });
 
-    //delete form with popup
-
     const deleteButton = this._element.querySelector(".card__delete-button");
     deleteButton.addEventListener("click", () => {
-      this._handleDeleteCard(this);
+      this._handleDeleteCard(this._cardData._id, this._element);
     });
-    //
+
     const cardImageEl = this._element.querySelector(".card__image");
     cardImageEl.addEventListener("click", () => {
-      this._handleImageClick(this._cardData); // Call the function with the required arguments
+      this._handleImageClick(this._cardData);
     });
-  }
-
-  _handleDeleteCard() {
-    this._element.remove(); // Remove the card element from the DOM
-    //this._element = null;
   }
 
   generateCard() {

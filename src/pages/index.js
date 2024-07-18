@@ -95,24 +95,6 @@ const popupWithImage = new PopupWithImage({
 });
 popupWithImage.setEventListeners();
 
-// Delete Confirmation Popup
-/*const deleteCardPopup = new PopupWithConfirmation({
-  popupSelector: "#delete__card-modal",
-  handleFormSubmit: (cardId) => {
-    console.log("Delete card ID:", cardId); // Debugging line
-    api
-      .deleteCard(cardId)
-      .then(() => {
-        document.getElementById(cardId).remove();
-        deleteCardPopup.close();
-      })
-      .catch((err) => {
-        console.error("Delete card error:", err);
-      });
-  },
-});
-deleteCardPopup.setEventListeners();
-*/
 // Card Section
 const cardSection = new Section(
   {
@@ -124,66 +106,66 @@ const cardSection = new Section(
         () => {
           popupWithImage.open(cardData);
         },
-        (cardId) => {
-          deleteCardPopup.open(cardId);
+        (cardId, cardElement) => {
+          deleteCardPopup.open(cardId, cardElement);
         }
       );
       const cardElement = cardInstance.generateCard();
-      cardElement.id = cardData._id;
+      cardElement.id = cardData._id; // Ensure each card has a unique id
       cardSection.addItem(cardElement);
     },
   },
   ".cards__list"
 );
 cardSection.renderItems();
-
+/*const deleteCardPopup = new PopupWithConfirmation({
+  popupSelector: "#delete__card-modal",
+  handleFormSubmit: (cardId, cardElement) => {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        cardElement.remove();
+        deleteCardPopup.close();
+      })
+      .catch((err) => {
+        console.error("Delete card error:", err);
+      });
+  },
+});
+deleteCardPopup.setEventListeners();
+*/
 // Form Handlers
 const handleProfileFormSubmit = (data) => {
-  api
-    .editProfile(data.name, data.job)
-    .then((res) => {
-      userInfo.setUserInfo({ name: res.name, job: res.about });
-      editProfilePopup.close();
-    })
-    .catch((err) => {
-      console.error("Profile update error:", err);
-    });
+  api.editProfile(data.name, data.job).then((res) => {
+    userInfo.setUserInfo({ name: res.name, job: res.about });
+    editProfilePopup.close();
+  });
 };
 
 const handleAddCardFormSubmit = (data) => {
-  api
-    .addCard(data.title, data.link)
-    .then((res) => {
-      const cardInstance = new Card(
-        res,
-        "#card-template",
-        () => {
-          popupWithImage.open(res);
-        },
-        (cardId) => {
-          deleteCardPopup.open(cardId);
-        }
-      );
-      const cardElement = cardInstance.generateCard();
-      cardElement.id = res._id;
-      cardSection.addItem(cardElement);
-      addCardPopup.close();
-    })
-    .catch((err) => {
-      console.error("Add card error:", err);
-    });
+  api.addCard(data.title, data.link).then((res) => {
+    const cardInstance = new Card(
+      res,
+      "#card-template",
+      () => {
+        popupWithImage.open(res);
+      },
+      (cardId, cardElement) => {
+        deleteCardPopup.open(cardId, cardElement);
+      }
+    );
+    const cardElement = cardInstance.generateCard();
+    cardElement.id = res._id; // Ensure each card has a unique id
+    cardSection.addItem(cardElement);
+    addCardPopup.close();
+  });
 };
 
 const handleAvatarFormSubmit = (data) => {
-  api
-    .updateAvatar(data.avatar)
-    .then((res) => {
-      userInfo.setUserAvatar(res.avatar);
-      editAvatarPopup.close();
-    })
-    .catch((err) => {
-      console.error("Avatar update error:", err);
-    });
+  api.updateAvatar(data.avatar).then((res) => {
+    userInfo.setUserAvatar(res.avatar);
+    editAvatarPopup.close();
+  });
 };
 
 // Popup Modals

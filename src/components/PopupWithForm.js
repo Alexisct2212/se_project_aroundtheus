@@ -17,6 +17,13 @@ export default class PopupWithForm extends Popup {
     });
     return this._formValues;
   }
+  setLoading(isLoading) {
+    if (isLoading) {
+      this._modalButton.textContent = "Saving...";
+    } else {
+      this._modalButton.textContent = "Save";
+    }
+  }
 
   setEventListeners() {
     super.setEventListeners();
