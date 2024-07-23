@@ -99,9 +99,11 @@ popupWithImage.setEventListeners();
 const deleteCardPopup = new PopupWithConfirmation({
   popupSelector: "#delete__card-modal",
   handleFormSubmit: (cardId, cardElement) => {
+    console.log(`Deleting card with cardId=${cardId}`);
     api
       .deleteCard(cardId)
       .then(() => {
+        console.log("Card successfully deleted");
         cardElement.remove();
         deleteCardPopup.close();
       })

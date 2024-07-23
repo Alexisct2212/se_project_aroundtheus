@@ -5,13 +5,6 @@ export default class PopupWithConfirmation extends Popup {
     super({ popupSelector });
     this._handleFormSubmit = handleFormSubmit;
   }
-  setLoading(isLoading) {
-    if (isLoading) {
-      this._modalButton.textContent = "Deleting...";
-    } else {
-      this._modalButton.textContent = "Yes";
-    }
-  }
 
   setEventListeners() {
     super.setEventListeners();
@@ -19,12 +12,25 @@ export default class PopupWithConfirmation extends Popup {
       evt.preventDefault();
       const cardId = this._popupElement.dataset.cardId;
       const cardElement = document.getElementById(cardId);
-      this._handleFormSubmit(cardId, cardElement);
+      if (cardId && cardElement) {
+        this._handleFormSubmit(cardId, cardElement);
+      } else {
+        console.error("Missing cardId or cardElement");
+      }
     });
   }
 
   open(cardId, cardElement) {
+    console.log(`Opening delete confirmation for cardId=${cardId}`);
     this._popupElement.dataset.cardId = cardId;
     super.open();
+  }
+
+  setLoading(isLoading) {
+    if (isLoading) {
+      this._modalButton.textContent = "Deleting...";
+    } else {
+      this._modalButton.textContent = "Yes";
+    }
   }
 }

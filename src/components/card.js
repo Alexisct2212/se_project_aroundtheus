@@ -28,10 +28,11 @@ export default class Card {
       likeButton.classList.toggle("card__like-button_active");
     });
 
-    const deleteButton = this._element.querySelector(".card__delete-button");
-    deleteButton.addEventListener("click", () => {
-      this._handleDeleteCard(this._cardData._id, this._element);
-    });
+    this._element
+      .querySelector(".card__delete-button")
+      .addEventListener("click", () => {
+        this._handleDeleteClick(this._cardData._id, this._element);
+      });
 
     const cardImageEl = this._element.querySelector(".card__image");
     cardImageEl.addEventListener("click", () => {
