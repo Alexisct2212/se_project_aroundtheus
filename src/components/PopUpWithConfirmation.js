@@ -1,16 +1,10 @@
 import Popup from "./popup.js";
 
-export default class PopupWithForm extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
+export default class PopupWithConfirmation extends Popup {
+  constructor({ popupSelector, handleFormSubmit }) {
     super({ popupSelector });
-    this._form = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
-    this._modalButton = this._popupElement.querySelector(".modal__button");
   }
-  setSubmit(handleSubmit) {
-    this._handleFormSubmit = handleSubmit;
-  }
-
   setLoading(isLoading) {
     if (isLoading) {
       this._modalButton.textContent = "Deleting...";
@@ -21,9 +15,16 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", (evt) => {
+    this._popupElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit();
+      const cardId = this._popupElement.dataset.cardId;
+      const cardElement = document.getElementById(cardId);
+      this._handleFormSubmit(cardId, cardElement);
     });
+  }
+
+  open(cardId, cardElement) {
+    this._popupElement.dataset.cardId = cardId;
+    super.open();
   }
 }

@@ -61,6 +61,7 @@ const initialCards = [
   },
 ];
 //
+// API initialization
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -85,7 +86,7 @@ addCardFormValidator.enableValidation();
 
 const avatarEditFormValidator = new FormValidator(
   options,
-  document.querySelector("#change__profile_picture form")
+  document.querySelector("#change__profile_picture")
 );
 avatarEditFormValidator.enableValidation();
 
@@ -95,31 +96,7 @@ const popupWithImage = new PopupWithImage({
 });
 popupWithImage.setEventListeners();
 
-// Card Section
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const cardInstance = new Card(
-        cardData,
-        "#card-template",
-        () => {
-          popupWithImage.open(cardData);
-        },
-        (cardId, cardElement) => {
-          deleteCardPopup.open(cardId, cardElement);
-        }
-      );
-      const cardElement = cardInstance.generateCard();
-      cardElement.id = cardData._id; // Ensure each card has a unique id
-      cardSection.addItem(cardElement);
-    },
-  },
-  ".cards__list"
-);
-cardSection.renderItems();
-
-/*const deleteCardPopup = new PopupWithConfirmation({
+const deleteCardPopup = new PopupWithConfirmation({
   popupSelector: "#delete__card-modal",
   handleFormSubmit: (cardId, cardElement) => {
     api
@@ -133,7 +110,35 @@ cardSection.renderItems();
       });
   },
 });
-deleteCardPopup.setEventListeners();*/
+deleteCardPopup.setEventListeners();
+// Function to create card
+const createCard = (cardData) => {
+  const cardInstance = new Card(
+    cardData,
+    "#card-template",
+    () => {
+      popupWithImage.open(cardData);
+    },
+    (cardId, cardElement) => {
+      deleteCardPopup.open(cardId, cardElement);
+    }
+  );
+  return cardInstance.generateCard();
+};
+
+// Card Section initialization
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      const cardElement = createCard(cardData);
+      cardElement.id = cardData._id; // Ensure each card has a unique id
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".cards__list"
+);
+cardSection.renderItems();
 // Form Handlers
 const handleProfileFormSubmit = (data) => {
   api
@@ -216,5 +221,5 @@ profileEditButton.addEventListener("click", () => {
 
 profileAvatarEditButton.addEventListener("click", () => {
   editAvatarPopup.open();
-  avatarEditFormValidator.resetValidation();
+  avatarEditFormValidator.reset();
 });
