@@ -9,8 +9,6 @@ export default class FormValidator {
     this._inputEls = [];
     this._submitButton = null;
     this._formEl = formEl;
-    this._settings = settings;
-    this._formElement = formElement;
   }
 
   _showInputError(inputEl) {
@@ -76,7 +74,7 @@ export default class FormValidator {
     this._toggleButtonState();
   }
   resetValidation() {
-    this._formElement.reset();
+    this._formEl.reset();
     // Add other reset functionalities...
     this.toggleButtonState();
   }
