@@ -72,9 +72,9 @@ const api = new Api({
 
 // User Info
 const userInfo = new UserInfo({
-  profileTitle,
-  profileDescription,
-  profilePicture,
+  profileTitle: document.querySelector(".profile__title"),
+  profileDescription: document.querySelector(".profile__description"),
+  profilePicture: document.querySelector(".profile__image"),
 });
 
 // Form Validators
@@ -142,6 +142,7 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 // Form Handlers
+
 const handleProfileFormSubmit = (data) => {
   api
     .editProfile(data.name, data.job)
@@ -183,7 +184,8 @@ const handleAvatarFormSubmit = (data) => {
   api
     .updateAvatar(data.avatar)
     .then((res) => {
-      userInfo.setAvatar(res.avatar); // Fixed method call
+      console.log("res", res);
+      userInfo.setUseravatar(res.avatar); // Fixed method call
       editAvatarPopup.close();
     })
     .catch((err) => {
