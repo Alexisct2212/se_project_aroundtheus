@@ -146,6 +146,7 @@ const handleProfileFormSubmit = (data) => {
   api
     .editProfile(data.name, data.job)
     .then((res) => {
+      console.log("Profile Response:", res); // Log the response to see the structure
       userInfo.setUserInfo({ name: res.name, job: res.about });
       editProfilePopup.close();
     })
@@ -182,7 +183,7 @@ const handleAvatarFormSubmit = (data) => {
   api
     .updateAvatar(data.avatar)
     .then((res) => {
-      userInfo.setUserAvatar(res.avatar);
+      userInfo.setAvatar(res.avatar); // Fixed method call
       editAvatarPopup.close();
     })
     .catch((err) => {

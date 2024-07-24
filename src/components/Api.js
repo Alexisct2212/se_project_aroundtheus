@@ -39,20 +39,22 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar,
+        avatar: data.Avatar,
       }),
     }).then(this._handleResponse);
   }
 
-  addCard({ name, link }) {
+  addCard(title, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        ...this._headers,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, link }),
-    }).then(this._checkResponse);
+      headers: this._headers,
+      body: JSON.stringify({
+        name: title,
+        link: link,
+      }),
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   deleteCard(cardId) {
