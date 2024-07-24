@@ -181,11 +181,12 @@ const handleAddCardFormSubmit = (data) => {
 };
 
 const handleAvatarFormSubmit = (data) => {
+  console.log("Update Avatar Data:", data);
   api
     .updateAvatar(data.avatar)
     .then((res) => {
-      console.log("res", res);
-      userInfo.setUseravatar(res.avatar); // Fixed method call
+      console.log("Update Avatar Response:", res);
+      userInfo.setAvatar(res.avatar); // Use the updated method name
       editAvatarPopup.close();
     })
     .catch((err) => {
