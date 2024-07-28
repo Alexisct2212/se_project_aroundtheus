@@ -73,9 +73,4 @@ export default class FormValidator {
   toggleButtonState() {
     this._toggleButtonState();
   }
-  resetValidation() {
-    this._formEl.reset();
-    // Add other reset functionalities...
-    this.toggleButtonState();
-  }
 }

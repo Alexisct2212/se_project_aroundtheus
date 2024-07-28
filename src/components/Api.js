@@ -13,25 +13,27 @@ export default class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      method: "GET",
       headers: this._headers,
     }).then(this._checkResponse);
   }
 
-  editProfile(data) {
+  editProfile(name, job) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        about: data.about,
+        name: name,
+        about: job,
       }),
-    }).then(this._handleResponse);
+    }).then(this._checkResponse);
   }
 
   updateAvatar(data) {
@@ -61,7 +63,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._handleResponse);
+    }).then(this._checkResponse);
   }
 
   likeCard(cardId) {
