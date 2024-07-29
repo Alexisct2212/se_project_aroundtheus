@@ -128,6 +128,7 @@ const deleteCardPopup = new PopupWithConfirmation({
   },
 });
 deleteCardPopup.setEventListeners();
+
 // Function to create card
 const createCard = (cardData) => {
   const cardInstance = new Card(
@@ -144,11 +145,6 @@ const createCard = (cardData) => {
 };
 
 // Card Section initialization
-
-// Fetch and Render Cards from Server
-
-// Fetch and Render Cards from Server
-
 const cardSection = new Section(
   {
     items: initialCards,
@@ -161,9 +157,7 @@ const cardSection = new Section(
   ".cards__list"
 );
 cardSection.renderItems();
-
 // Form Handlers
-
 const handleProfileFormSubmit = (data) => {
   api
     .editProfile(data.name, data.job)
@@ -250,3 +244,21 @@ profileEditButton.addEventListener("click", () => {
 profileAvatarEditButton.addEventListener("click", () => {
   editAvatarPopup.open();
 });
+
+//like function
+function handleLikeButton(cardId, cardInstance) {
+  console.log(`Toggling like for cardId: ${cardId}`);
+  const isLiked = cardInstance._like; // Check current like status
+  const toggleLike = isLiked
+    ? api.unlikeCard(cardId) // Method for unliking a card
+    : api.likeCard(cardId); // Method for liking a card
+
+  toggleLike
+    .then((updatedCardData) => {
+      console.log(`Received updated like state: ${updatedCardData.isliked}`);
+      cardInstance.handleLike(updatedCardData.isliked); // Update card state
+    })
+    .catch((err) => {
+      console.error("Like toggle error:", err);
+    });
+}

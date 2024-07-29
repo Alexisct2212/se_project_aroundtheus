@@ -10,28 +10,48 @@ export default class Card {
     this._templateSelector = templateSelector;
     this._link = cardData.link;
     this._name = cardData.name;
-    this._element = null;
+    this._cardId = cardData._id;
+    this._likes = cardData.isliked;
     this._handleImageClick = handleImageClick;
     this._handleLikeButton = handleLikeButton;
     this._handleDeleteCard = handleDeleteCard;
+    this._element = null;
+    this._likeButton = null;
+    this._like = false; // Initially not liked
   }
 
   _getTemplate() {
     const cardTemplate = document.querySelector(this._templateSelector);
-    const cardElement = cardTemplate.content.cloneNode(true);
-    return cardElement.querySelector(".card");
+    const cardElement = cardTemplate.content
+      .cloneNode(true)
+      .querySelector(".card");
+    return cardElement;
+  }
+
+  _handleLikeIcon() {
+    if (this._like) {
+      this._likeButton.classList.add("card__like-button_active");
+    } else {
+      this._likeButton.classList.remove("card__like-button_active");
+    }
+  }
+
+  handleLike(liked) {
+    this._like = liked;
+    this._handleLikeIcon();
   }
 
   _setEventListeners() {
-    const likeButton = this._element.querySelector(".card__like-button");
-    likeButton.addEventListener("click", () => {
-      likeButton.classList.toggle("card__like-button_active");
+    this._likeButton = this._element.querySelector(".card__like-button");
+    this._likeButton.addEventListener("click", () => {
+      console.log(`Like button clicked for cardId: ${this._cardId}`);
+      this._handleLikeButton(this._cardId, this);
     });
 
     this._element
       .querySelector(".card__delete-button")
       .addEventListener("click", () => {
-        this._handleDeleteCard(this._cardData._id, this._element);
+        this._handleDeleteCard(this._cardId, this._element);
       });
 
     const cardImageEl = this._element.querySelector(".card__image");
@@ -39,7 +59,7 @@ export default class Card {
       this._handleImageClick(this._cardData);
     });
   }
-
+  //
   generateCard() {
     this._element = this._getTemplate();
 
@@ -51,6 +71,7 @@ export default class Card {
     cardTitleEl.textContent = this._name;
 
     this._setEventListeners();
+    this.handleLike(this._like);
 
     return this._element;
   }

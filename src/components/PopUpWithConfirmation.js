@@ -26,7 +26,7 @@ export default class PopupWithConfirmation extends Popup {
     super.open();
   }
 
-  setLoading(isLoading) {
+  setDeleting(isLoading) {
     if (isLoading) {
       this._modalButton.textContent = "Deleting...";
     } else {
