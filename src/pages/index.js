@@ -139,7 +139,16 @@ const createCard = (cardData) => {
     },
     (cardId, cardElement) => {
       deleteCardPopup.open(cardId, cardElement);
-    }
+    },
+    handleLikeButton,
+    api
+      .likeCard(cardData)
+      .then(() => {
+        console.log("like function is working ");
+      })
+      .catch((err) => {
+        console.log("like function error is", err);
+      })
   );
   return cardInstance.generateCard();
 };
