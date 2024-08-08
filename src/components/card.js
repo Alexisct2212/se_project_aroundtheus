@@ -12,12 +12,12 @@ export default class Card {
     this._name = cardData.name;
     this._cardId = cardData._id;
     this._likes = cardData.likes;
-    this._isLiked = cardData.isLiked || false; // Check if the card is liked
     this._handleImageClick = handleImageClick;
     this._handleLikeButton = handleLikeButton;
     this._handleDeleteCard = handleDeleteCard;
     this._element = null;
     this._likeButton = null;
+    this._like = cardData.isLiked || false; // Initialize like status from API
   }
 
   _getTemplate() {
@@ -29,21 +29,23 @@ export default class Card {
   }
 
   _handleLikeIcon() {
-    if (this._isLiked) {
+    if (this._like) {
       this._likeButton.classList.add("card__like-button_active");
     } else {
       this._likeButton.classList.remove("card__like-button_active");
     }
   }
 
-  toggleLike() {
-    this._isLiked = !this._isLiked;
+  handleLike(liked) {
+    console.log("Updating like status:", liked);
+    this._like = liked;
     this._handleLikeIcon();
   }
 
   _setEventListeners() {
     this._likeButton = this._element.querySelector(".card__like-button");
     this._likeButton.addEventListener("click", () => {
+      console.log(`Like button clicked for cardId: ${this._cardId}`);
       this._handleLikeButton(this._cardId, this);
     });
 
@@ -61,17 +63,14 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-
     const cardImageEl = this._element.querySelector(".card__image");
     const cardTitleEl = this._element.querySelector(".block");
 
     cardImageEl.src = this._link;
     cardImageEl.alt = this._name;
     cardTitleEl.textContent = this._name;
-
     this._setEventListeners();
-    this._handleLikeIcon();
-
+    this._handleLikeIcon(); // Initialize like status
     return this._element;
   }
 }
