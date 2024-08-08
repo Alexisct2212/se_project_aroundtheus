@@ -142,16 +142,6 @@ const createCard = (cardData) => {
     handleLikeButton
   ).generateCard();
 };
-
-// Fetch initial cards from the server
-api
-  .getInitialCards()
-  .then((cards) => {
-    cardSection.renderItems(cards);
-  })
-  .catch((err) => {
-    console.error("Error fetching initial cards:", err);
-  });
 //
 const cardSection = new Section(
   {
@@ -164,6 +154,14 @@ const cardSection = new Section(
   },
   ".cards__list"
 );
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardSection.renderItems(cards);
+  })
+  .catch((err) => {
+    console.error("Error fetching initial cards:", err);
+  });
 // Form Handlers
 const handleProfileFormSubmit = (data) => {
   api
