@@ -113,7 +113,6 @@ const deleteCardPopup = new PopupWithConfirmation({
       deleteCardPopup.close();
       return;
     }
-
     // Proceed to delete card from server
     api
       .deleteCard(cardId)
@@ -140,20 +139,12 @@ const createCard = (cardData) => {
     (cardId, cardElement) => {
       deleteCardPopup.open(cardId, cardElement);
     },
-    handleLikeButton,
-    api
-      .likeCard(cardData)
-      .then(() => {
-        console.log("like function is working ");
-      })
-      .catch((err) => {
-        console.log("like function error is", err);
-      })
+    handleLikeButton
   );
+
   return cardInstance.generateCard();
 };
-
-// Card Section initialization
+//
 const cardSection = new Section(
   {
     items: initialCards,
@@ -165,7 +156,9 @@ const cardSection = new Section(
   },
   ".cards__list"
 );
-cardSection.renderItems();
+api.getInitialCards().then((cards) => {
+  cardSection.renderItems(cards);
+});
 // Form Handlers
 const handleProfileFormSubmit = (data) => {
   api
