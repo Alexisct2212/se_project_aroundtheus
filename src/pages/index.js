@@ -193,7 +193,7 @@ const handleAddCardFormSubmit = (data) => {
       );
       const cardElement = cardInstance.generateCard();
       cardElement.id = res._id; // Ensure each card has a unique id
-      cardSection.addItem(cardElement);
+      cardSection.addItem(cardElement, "prepend");
       addCardPopup.close();
     })
     .catch((err) => {
