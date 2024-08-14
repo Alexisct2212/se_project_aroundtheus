@@ -164,16 +164,20 @@ api
   });
 // Form Handlers
 const handleProfileFormSubmit = (data) => {
+  editProfilePopup.setLoadingState(false); // Start loading state
+
   api
     .editProfile(data.name, data.job)
     .then((res) => {
-      console.log("Profile Response:", res);
       profileTitle.textContent = data.name;
       profileDescription.textContent = data.job;
       editProfilePopup.close();
     })
     .catch((err) => {
       console.error("Profile update error:", err);
+    })
+    .finally(() => {
+      editProfilePopup.setLoadingState(true); // End loading state
     });
 };
 
