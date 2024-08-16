@@ -3,7 +3,12 @@ import Popup from "./popup.js";
 export default class PopupWithConfirmation extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super({ popupSelector });
+    this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
+    this._submitButton = this._popupForm.querySelector(".modal__button"); // Add reference to the submit button
+    this._defaultButtonText = this._submitButton
+      ? this._submitButton.textContent
+      : "";
   }
 
   setEventListeners() {
@@ -26,11 +31,12 @@ export default class PopupWithConfirmation extends Popup {
     super.open();
   }
 
-  setDeleting(isLoading) {
-    if (isLoading) {
-      this._modalButton.textContent = "Deleting...";
-    } else {
-      this._modalButton.textContent = "Yes";
+  setDeleteState(isLoading) {
+    if (this._submitButton) {
+      // Check if submit button is available
+      this._submitButton.textContent = isLoading
+        ? "Deleting..."
+        : this._defaultButtonText;
     }
   }
 }

@@ -114,6 +114,7 @@ const deleteCardPopup = new PopupWithConfirmation({
       return;
     }
     // Proceed to delete card from server
+    deleteCardPopup.setDeleteState(true);
     api
       .deleteCard(cardId)
       .then(() => {
@@ -123,6 +124,10 @@ const deleteCardPopup = new PopupWithConfirmation({
       })
       .catch((err) => {
         console.error("Delete card error:", err);
+      })
+      .finally(() => {
+        // Reset the loading state regardless of success or error
+        deleteCardPopup.setDeleteState(false);
       });
   },
 });
@@ -182,6 +187,7 @@ const handleProfileFormSubmit = (data) => {
 };
 
 const handleAddCardFormSubmit = (data) => {
+  addCardPopup.setLoadingState(false);
   api
     .addCard(data.title, data.link)
     .then((res) => {
@@ -202,11 +208,14 @@ const handleAddCardFormSubmit = (data) => {
     })
     .catch((err) => {
       console.error("Add card error:", err);
+    })
+    .finally(() => {
+      addCardPopup.setLoadingState(true); // End loading state
     });
 };
 
 const handleAvatarFormSubmit = (data) => {
-  console.log("Update Avatar Data:", data);
+  editProfilePopup.setLoadingState(false);
   api
     .updateAvatar(data.avatar)
     .then((res) => {
@@ -216,6 +225,9 @@ const handleAvatarFormSubmit = (data) => {
     })
     .catch((err) => {
       console.error("Avatar update error:", err);
+    })
+    .finally(() => {
+      editProfilePopup.setLoadingState(true); // End loading state
     });
 };
 
