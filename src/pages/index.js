@@ -132,6 +132,15 @@ const deleteCardPopup = new PopupWithConfirmation({
   },
 });
 deleteCardPopup.setEventListeners();
+// server for the profile changes
+api
+  .getUserInfo()
+  .then((name, job) => {
+    userInfo.setUserInfo(name, job); // Set user info with fetched data
+  })
+  .catch((err) => {
+    console.error("Error fetching user info:", err);
+  });
 
 // Function to create card
 const createCard = (cardData) => {
@@ -230,7 +239,6 @@ const handleAvatarFormSubmit = (data) => {
       editProfilePopup.setLoadingState(true); // End loading state
     });
 };
-
 // Popup Modals
 const editProfilePopup = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
@@ -270,7 +278,6 @@ profileAvatarEditButton.addEventListener("click", () => {
 const handleLikeButton = (cardId, cardInstance) => {
   const isLiked = cardInstance._like;
   const toggleLike = isLiked ? api.unlikeCard(cardId) : api.likeCard(cardId);
-
   toggleLike
     .then((updatedCardData) => {
       console.log("Toggling like for cardId:", cardId);

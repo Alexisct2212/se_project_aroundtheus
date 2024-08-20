@@ -5,20 +5,21 @@ export default class UserInfo {
     this._profilePicture = profilePicture;
   }
 
+  setUserInfo({ name, job, avatar }) {
+    this._profileTitle.textContent = name;
+    this._profileDescription.textContent = job;
+    this._profilePicture.src = avatar;
+  }
+
   getUserInfo() {
     return {
       name: this._profileTitle.textContent,
-      job: this._profileDescription.textContent,
+      about: this._profileDescription.textContent,
     };
   }
 
-  setUserInfo({ name, job }) {
-    this._profileTitle.textContent = name;
-    this._profileDescription.textContent = job;
-  }
-
-  setAvatar(avatar) {
+  setAvatar(avatarUrl) {
     // Ensure consistent method name
-    this._profilePicture.src = avatar;
+    this._profilePicture.src = avatarUrl;
   }
 }
