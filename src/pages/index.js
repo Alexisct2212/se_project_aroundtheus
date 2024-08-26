@@ -132,25 +132,17 @@ const deleteCardPopup = new PopupWithConfirmation({
   },
 });
 deleteCardPopup.setEventListeners();
-// server for the profile changes
-api
-  .getUserInfo()
-  .then((name, job) => {
-    userInfo.setUserInfo(name, job); // Set user info with fetched data
-  })
-  .catch((err) => {
-    console.error("Error fetching user info:", err);
-  });
-
 // Function to create card
 const createCard = (cardData) => {
   return new Card(
     cardData,
-    "#card-template",
+    "#card-template", // The card template selector
     () => {
+      // Handle image preview when the card image is clicked
       popupWithImage.open(cardData);
     },
     (cardId, cardElement) => {
+      // Handle card deletion when the delete button is clicked
       deleteCardPopup.open(cardId, cardElement);
     },
     handleLikeButton
@@ -179,7 +171,6 @@ api
 // Form Handlers
 const handleProfileFormSubmit = (data) => {
   editProfilePopup.setLoadingState(false); // Start loading state
-
   api
     .editProfile(data.name, data.job)
     .then((res) => {
@@ -194,6 +185,19 @@ const handleProfileFormSubmit = (data) => {
       editProfilePopup.setLoadingState(true); // End loading state
     });
 };
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about, // Ensure this maps correctly to the job field
+      avatar: userData.avatar,
+    });
+  })
+  .catch((err) => {
+    console.error("Error fetching user info:", err);
+  });
+// server for the profile changes
 
 const handleAddCardFormSubmit = (data) => {
   addCardPopup.setLoadingState(false);
