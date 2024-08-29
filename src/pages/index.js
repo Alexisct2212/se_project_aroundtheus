@@ -228,7 +228,7 @@ const handleAddCardFormSubmit = (data) => {
 };
 
 const handleAvatarFormSubmit = (data) => {
-  editProfilePopup.setLoadingState(false);
+  editAvatarPopup.setLoadingState(true);
   api
     .updateAvatar(data.avatar)
     .then((res) => {
@@ -240,7 +240,7 @@ const handleAvatarFormSubmit = (data) => {
       console.error("Avatar update error:", err);
     })
     .finally(() => {
-      editProfilePopup.setLoadingState(true); // End loading state
+      editAvatarPopup.setLoadingState(false); // End loading state
     });
 };
 // Popup Modals
