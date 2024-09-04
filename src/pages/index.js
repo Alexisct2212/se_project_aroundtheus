@@ -198,7 +198,6 @@ api
     console.error("Error fetching user info:", err);
   });
 // server for the profile changes
-
 const handleAddCardFormSubmit = (data) => {
   addCardPopup.setLoadingState(false);
   api
@@ -212,7 +211,8 @@ const handleAddCardFormSubmit = (data) => {
         },
         (cardId, cardElement) => {
           deleteCardPopup.open(cardId, cardElement);
-        }
+        },
+        handleLikeButton
       );
       const cardElement = cardInstance.generateCard();
       cardElement.id = res._id; // Ensure each card has a unique id
