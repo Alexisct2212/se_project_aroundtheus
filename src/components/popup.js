@@ -27,12 +27,8 @@ export default class Popup {
   };
   setEventListeners() {
     const closebutton = this._popupElement.querySelector(".modal__close");
+    closebutton.addEventListener("click", () => this.close());
 
-    this._popupElement.addEventListener("click", (e) => {
-      if (closebutton) {
-        closebutton.addEventListener("click", () => this.close());
-      }
-    });
     this._popupElement.addEventListener("click", (e) => {
       if (e.target === this._popupElement) {
         this.close();
