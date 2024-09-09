@@ -147,18 +147,7 @@ const handleAddCardFormSubmit = (data) => {
   api
     .addCard(data.title, data.link)
     .then((res) => {
-      const cardInstance = new Card(
-        res,
-        "#card-template",
-        () => {
-          popupWithImage.open(res);
-        },
-        (cardId, cardElement) => {
-          deleteCardPopup.open(cardId, cardElement);
-        },
-        handleLikeButton
-      );
-      const cardElement = cardInstance.generateCard();
+      const cardElement = createCard(res);
       cardElement.id = res._id; // Ensure each card has a unique id
       cardSection.addItem(cardElement, "prepend");
       addCardPopup.close();
