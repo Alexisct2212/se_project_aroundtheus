@@ -1,8 +1,8 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "../pages/index.css";
-import PopupWithForm from "../components/PopupWithForm.js";
-import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopUpWithForm.js";
+import PopupWithImage from "../components/PopUpWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import {
@@ -214,7 +214,7 @@ profileAvatarEditButton.addEventListener("click", () => {
 
 //like function
 const handleLikeButton = (cardId, cardInstance) => {
-  const isLiked = cardInstance._like;
+  const isLiked = cardInstance.like;
   const toggleLike = isLiked ? api.unlikeCard(cardId) : api.likeCard(cardId);
   toggleLike
     .then((updatedCardData) => {

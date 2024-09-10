@@ -29,7 +29,7 @@ export default class Card {
   }
 
   _handleLikeIcon() {
-    if (this._like) {
+    if (this.like) {
       this._likeButton.classList.add("card__like-button_active");
     } else {
       this._likeButton.classList.remove("card__like-button_active");
@@ -38,7 +38,7 @@ export default class Card {
 
   handleLike(liked) {
     console.log("Updating like status:", liked);
-    this._like = liked;
+    this.like = liked;
     this._handleLikeIcon();
   }
 
