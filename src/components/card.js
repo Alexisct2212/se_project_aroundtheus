@@ -17,7 +17,7 @@ export default class Card {
     this._handleDeleteCard = handleDeleteCard;
     this._element = null;
     this._likeButton = null;
-    this._like = cardData.isLiked || false; // Initialize like status from API
+    this.like = cardData.isLiked || false; // Initialize like status from API
   }
 
   _getTemplate() {
