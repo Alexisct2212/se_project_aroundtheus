@@ -1,3 +1,41 @@
+export const initialCards = [
+  {
+    name: "Yosemite Valley",
+    description: "Yosemite Valley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+    _id: "card1",
+  },
+  {
+    name: "Lake Louise",
+    description: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+    _id: "card12",
+  },
+  {
+    name: "Bald Mountains",
+    description: "Bald Mountains",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+    _id: "card123",
+  },
+  {
+    name: "Latemar",
+    description: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+    _id: "card4",
+  },
+  {
+    name: "Vanoise National Park",
+    description: "Vanoise National Park",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+    _id: "card5",
+  },
+  {
+    name: "Lago di Braies",
+    description: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+    _id: "card6",
+  },
+];
 export const options = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -48,3 +86,6 @@ export function openModal(modal) {
 //
 export const EscKey = "Escape";
 export const profilePicture = document.querySelector(".profile__image");
+export const profileAvatarEditButton = document.querySelector(
+  ".profile__image-overlay"
+);

@@ -1,7 +1,11 @@
 import { EscKey } from "../utils/constants";
 export default class Popup {
   constructor({ popupSelector }) {
+    console.log("popupSelector:", popupSelector); // Add this line
     this._popupElement = document.querySelector(popupSelector);
+    if (!this._popupElement) {
+      console.error(`Popup element with selector "${popupSelector}" not found`);
+    }
   }
   open() {
     this._popupElement.classList.add("modal_opened");
@@ -23,12 +27,8 @@ export default class Popup {
   };
   setEventListeners() {
     const closebutton = this._popupElement.querySelector(".modal__close");
+    closebutton.addEventListener("click", () => this.close());
 
-    this._popupElement.addEventListener("click", (e) => {
-      if (closebutton) {
-        closebutton.addEventListener("click", () => this.close());
-      }
-    });
     this._popupElement.addEventListener("click", (e) => {
       if (e.target === this._popupElement) {
         this.close();
